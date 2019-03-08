@@ -16,6 +16,7 @@ public class UserService {
         try {
             if (rs.next()) {
                 if (rs.getString("email").equals(user.getEmail()) && rs.getString("password").equals(user.getPassword())) {
+                    user.setCity(rs.getString("city"));
                     return true;
                 } else {
                     return false;

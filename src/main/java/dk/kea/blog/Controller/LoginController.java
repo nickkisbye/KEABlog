@@ -22,6 +22,7 @@ public class LoginController {
 
         if (userService.verifyUser(user)) {
             session.setAttribute("email", user.getEmail());
+
             return "index";
         }
         return "index";
