@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+
+<h1>Create Blogpost</h1>
+
+<form th:action="@{/blog/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
+    <div class="form-group col-md-9 mt-4">
+        <label>Title:</label>
+        <input type="text" class="form-control"placeholder="Skriv titel her" name="title">
+    </div>
+    <div class="form-group col-md-9">
+        <label>Body: </label>
+        <textarea name="text" class="form-control"></textarea>
+    </div>
+    <div class="form-group col-md-9">
+        <input th:value="${session.id}" type="hidden" name="aid">
+        <button type="submit" class="btn btn-primary btn-block mt-3 col-md-12">Create blogpost</button>
+        <br>
+    </div>
+</form>
+
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

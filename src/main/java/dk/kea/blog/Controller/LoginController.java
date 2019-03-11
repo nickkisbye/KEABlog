@@ -25,8 +25,6 @@ public class LoginController {
             session.setAttribute("firstName", user.getFirstname());
             session.setAttribute("lastName", user.getLastname());
             session.setAttribute("city", user.getCity());
-            session.setAttribute("level", user.getLevel());
-            session.setAttribute("roleName", user.getRoleName());
 
             return "index";
         }

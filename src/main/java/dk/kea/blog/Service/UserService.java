@@ -21,9 +21,6 @@ public class UserService {
                     user.setCity(rs.getString("city"));
                     user.setFirstname(rs.getString("firstName"));
                     user.setLastname(rs.getString("lastName"));
-                    user.setLevel(rs.getInt("level"));
-                    user.setRoleName(rs.getString("name"));
-
                     return true;
                 } else {
                     return false;
