@@ -19,6 +19,9 @@ public class ProfilController {
     @PostMapping(value="/profil")
     public String changePassword(@ModelAttribute(name="User") User user, Model model, HttpSession session) {
 
+        session.setAttribute("password", user.getPassword());
+
+
         if(userService.changePassword(user)) {
             System.out.println("YES");
         } else {
