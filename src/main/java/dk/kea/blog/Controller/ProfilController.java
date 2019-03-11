@@ -21,7 +21,6 @@ public class ProfilController {
 
         session.setAttribute("password", user.getPassword());
 
-        System.out.println(user.getPassword());
 
         if(userService.changePassword(user)) {
             System.out.println("YES");
