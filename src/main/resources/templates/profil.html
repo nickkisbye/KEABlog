@@ -15,6 +15,8 @@
     <Strong class="nav-link" th:text="${session.lastName}"></Strong>
     <Strong class="nav-link" th:text="${session.city}"></Strong>
     <Strong class="nav-link" th:text="${session.email}"></Strong>
+    <Strong class="nav-link" th:text="${session.roleName}"></Strong>
+    <Strong class="nav-link" th:text="${session.level}"></Strong>
 
     <form th:action="@{/profil}" th:object="${user}" method="post">
         <label>New password</label>
