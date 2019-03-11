@@ -12,4 +12,7 @@ public class MenuController {
         return "index";
     }
 
+    @GetMapping("/profil")
+    public String profil() { return "profil"; }
+
 }

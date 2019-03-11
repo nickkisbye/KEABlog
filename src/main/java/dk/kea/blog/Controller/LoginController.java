@@ -22,6 +22,9 @@ public class LoginController {
 
         if (userService.verifyUser(user)) {
             session.setAttribute("email", user.getEmail());
+            session.setAttribute("firstName", user.getFirstname());
+            session.setAttribute("lastName", user.getLastname());
+            session.setAttribute("city", user.getCity());
 
             return "index";
         }

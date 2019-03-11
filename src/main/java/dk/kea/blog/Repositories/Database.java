@@ -32,4 +32,17 @@ public class Database {
         }
         return null;
     }
+
+    public void newPasswordDB(User user){
+        String sql = "UPDATE users SET password = ? WHERE email = ?";
+        try {
+            preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1,user.getPassword());
+            preparedStatement.setString(2,user.getEmail());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
