@@ -10,12 +10,13 @@ public class User {
     private String password;
     private int level;
     private String roleName;
+    private int rid;
 
     public User() {
         super();
     }
 
-    public User(int id, String firstname, String lastname, String city, String email, String password, int level, String roleName) {
+    public User(int id, String firstname, String lastname, String city, String email, String password, int level, String roleName, int rid) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -24,6 +25,7 @@ public class User {
         this.password = password;
         this.level = level;
         this.roleName = roleName;
+        this.rid = rid;
     }
 
     public int getId() {
@@ -88,6 +90,14 @@ public class User {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
     }
 }
 

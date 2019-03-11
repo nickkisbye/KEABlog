@@ -22,7 +22,7 @@ public class Database {
     }
 
     public ResultSet selectUser(User user) {
-        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id WHERE email = ? AND password = ? ";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1,user.getEmail());
@@ -47,7 +47,7 @@ public class Database {
     }
 
     public ResultSet getBlogPosts() {
-        String query = "SELECT * FROM blog INNER JOIN users ON blog.fk_users = users.id ORDER BY blog.id";
+        String query = "SELECT * FROM blog INNER JOIN users ON blog.fk_users = users.id ORDER BY blog.id DESC";
         try {
             preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();
@@ -70,5 +70,34 @@ public class Database {
             e.printStackTrace();
         }
 
+    }
+
+    public void createUser(User user) {
+        String query = "INSERT INTO users(firstName, lastName, city, email, password, fk_roles) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, user.getFirstname());
+            preparedStatement.setString(2, user.getLastname());
+            preparedStatement.setString(3, user.getCity());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setInt(6, user.getRid());
+            preparedStatement.execute();
+            preparedStatement.close();
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public  ResultSet getRole() {
+        String query = "SELECT id,name FROM roles";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

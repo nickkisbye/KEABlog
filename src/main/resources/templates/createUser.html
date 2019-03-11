@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+
+<h1>Create User</h1>
+
+<form th:action="@{/user/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
+    <div class="form-group col-md-9 mt-4">
+        <label>First name:</label>
+        <input type="text" class="form-control"placeholder="Skriv titel her" name="firstname">
+    </div>
+    <div class="form-group col-md-9 mt-4">
+        <label>Last name:</label>
+        <input type="text" class="form-control"placeholder="Skriv titel her" name="lastname">
+    </div>
+    <div class="form-group col-md-9 mt-4">
+        <label>City:</label>
+        <input type="text" class="form-control"placeholder="Skriv titel her" name="city">
+    </div>
+    <div class="form-group col-md-9 mt-4">
+        <label>Email:</label>
+        <input type="text" class="form-control"placeholder="Skriv titel her" name="email">
+    </div>
+    <div class="form-group col-md-9 mt-4">
+        <label>Password:</label>
+        <input type="password" class="form-control"placeholder="Skriv titel her" name="password">
+    </div>
+    <div class="form-group col-md-9 mt-4">
+        <label>Role:</label>
+        <select name="rid">
+            <option th:each="role: ${roles}" th:value="${role.rid}"><p th:text="${role.roleName}"></p></option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-block mt-3 col-md-12">Create user</button>
+    </div>
+</form>
+
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

@@ -25,9 +25,17 @@ public class LoginController {
             session.setAttribute("firstName", user.getFirstname());
             session.setAttribute("lastName", user.getLastname());
             session.setAttribute("city", user.getCity());
-
+            session.setAttribute("name", user.getRoleName());
+            session.setAttribute("level", user.getLevel());
+            session.setAttribute("id", user.getId());
             return "index";
         }
+        return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.setAttribute("email",null);
         return "index";
     }
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +23,9 @@ public class UserService {
                     user.setCity(rs.getString("city"));
                     user.setFirstname(rs.getString("firstName"));
                     user.setLastname(rs.getString("lastName"));
+                    user.setRoleName(rs.getString("name"));
+                    user.setLevel(rs.getInt("level"));
+                    user.setId(rs.getInt("id"));
                     return true;
                 } else {
                     return false;
@@ -51,6 +56,28 @@ public class UserService {
 
         db.newPasswordDB(user);
         return true;
+    }
+
+    public boolean createUser(User user) {
+        db.createUser(user);
+
+        return true;
+    }
+
+    public List<User> getRoles() {
+        List<User> roleList = new ArrayList<>();
+        ResultSet rs = db.getRole();
+        try {
+            while (rs.next()) {
+                User user = new User();
+                user.setRoleName(rs.getString("name"));
+                user.setRid(rs.getInt("id"));
+                roleList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roleList;
     }
 
 }

@@ -32,10 +32,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">My Profile</a>
                     </li>
+                    <div th:if="${session.level >= 90}">
                     <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin Panel</a>
                     </li>
-
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log out</a>
+                    </li>
                 </ul>
             </div>
         </div>
