@@ -17,7 +17,7 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value="/profil")
+    @PostMapping(value="/profile")
     public String changePassword(@ModelAttribute(name="User") User user) {
 
         if(userService.changePassword(user)) {
