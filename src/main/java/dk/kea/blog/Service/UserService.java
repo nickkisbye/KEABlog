@@ -21,7 +21,6 @@ public class UserService {
                     user.setCity(rs.getString("city"));
                     user.setFirstname(rs.getString("firstName"));
                     user.setLastname(rs.getString("lastName"));
-
                     return true;
                 } else {
                     return false;
