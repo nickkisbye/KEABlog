@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <header>
+        <div th:replace="fragments/header :: header"></div>
+    </header>
+
+    <h1>PROFIL</h1>
+
+    <Strong class="nav-link" th:text="${session.firstName}"></Strong>
+    <Strong class="nav-link" th:text="${session.lastName}"></Strong>
+    <Strong class="nav-link" th:text="${session.city}"></Strong>
+    <Strong class="nav-link" th:text="${session.email}"></Strong>
+
+    <form th:action="@{/profil}" th:object="${user}" method="post">
+        <label>New password</label>
+        <input type="text" placeholder="password" name="password">
+        <input type="hidden" name="email" th:value="${session.email}">
+        <button type="submit">change</button>
+    </form>
+
+    <footer>
+        <div th:replace="fragments/footer :: footer"></div>
+    </footer>
+</body>
+</html>
