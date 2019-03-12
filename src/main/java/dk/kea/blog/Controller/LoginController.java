@@ -21,15 +21,15 @@ public class LoginController {
     public String login(@ModelAttribute (name="User") User user, Model model, HttpSession session) {
 
         if (userService.verifyUser(user)) {
-            session.setAttribute("email", user.getEmail());
-            session.setAttribute("firstName", user.getFirstname());
-            session.setAttribute("lastName", user.getLastname());
-            session.setAttribute("city", user.getCity());
-            session.setAttribute("roleName", user.getRoleName());
-            session.setAttribute("level", user.getLevel());
-            session.setAttribute("id", user.getId());
-            session.setAttribute("age", user.getAge());
-            session.setAttribute("date", user.getDate());
+            session.setAttribute("email",       user.getEmail());
+            session.setAttribute("firstName",   user.getFirstname());
+            session.setAttribute("lastName",    user.getLastname());
+            session.setAttribute("city",        user.getCity());
+            session.setAttribute("roleName",    user.getRoleName());
+            session.setAttribute("level",       user.getLevel());
+            session.setAttribute("id",          user.getId());
+            session.setAttribute("age",         user.getAge());
+            session.setAttribute("date",        user.getDate());
             return "redirect:/";
         }
         return "index";

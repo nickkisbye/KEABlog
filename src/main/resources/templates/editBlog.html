@@ -8,7 +8,7 @@
 <header>
     <div th:replace="fragments/header :: header"></div>½
 </header>
-
+<h1 class="text-center mt-4"><a href="/admin">Admin</a> > Edit Blogpost</h1>
 <div th:each = "blog: ${blogs}">
 <form th:action="@{/blog/update}" th:object="${Blog}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">

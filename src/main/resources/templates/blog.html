@@ -9,7 +9,7 @@
     <div th:replace="fragments/header :: header"></div>
 </header>
 
-<h1 class="text-center mt-4">Manage Blogpost</h1>
+<h1 class="text-center mt-4"><a href="/admin">Admin</a> > Manage Blogpost</h1>
 
 <form th:action="@{/blog/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">

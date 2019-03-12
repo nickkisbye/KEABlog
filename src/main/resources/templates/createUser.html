@@ -8,7 +8,7 @@
     <div th:replace="fragments/header :: header"></div>
 </header>
 <div>
-<h1 class="text-center mt-4">Manage users</h1>
+<h1 class="text-center mt-4"><a href="/admin">Admin</a> > Manage users</h1>
 <form th:action="@{/user/create}" th:object="${User}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">
         <label>First name:</label>
