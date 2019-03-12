@@ -2,11 +2,7 @@ package dk.kea.blog.Repositories;
 
 import dk.kea.blog.Models.Blog;
 import dk.kea.blog.Models.User;
-
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-
-import static org.codehaus.groovy.runtime.EncodingGroovyMethods.md5;
 
 public class Database {
 
