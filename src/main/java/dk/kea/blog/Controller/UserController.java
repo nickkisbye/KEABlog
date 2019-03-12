@@ -41,7 +41,8 @@ public class UserController {
     public String updateUser(@PathVariable("id") int id, Model model) {
 
         model.addAttribute("users", service.findUserById(id));
-        return "editUddser";
+        model.addAttribute("roles", service.getRoles());
+        return "editUser";
     }
 
 

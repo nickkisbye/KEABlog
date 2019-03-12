@@ -103,7 +103,7 @@ public class Database {
     }
 
     public ResultSet findUserById(int id) {
-        String query = "SELECT * FROM users INNER JOIN users ON blog.fk_users = users.id WHERE id = ?";
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id WHERE users.id = ?";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
