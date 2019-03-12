@@ -9,8 +9,7 @@
 </header>
 <div>
 <h1 class="text-center mt-4">Manage users</h1>
-
-<form th:action="@{/user/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
+<form th:action="@{/user/create}" th:object="${User}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">
         <label>First name:</label>
         <input type="text" class="form-control"placeholder="First name" name="firstname">

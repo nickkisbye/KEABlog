@@ -24,9 +24,9 @@ public class UserController {
     }
 
     @PostMapping("/user/create")
-    public String createUser(@ModelAttribute(name="user") User user) {
+    public String createUser(@ModelAttribute(name="user") User user, Model model) {
         if (service.createUser(user)) {
-            //DO IT
+
         }
         return "redirect:/user/create";
     }

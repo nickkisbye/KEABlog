@@ -37,7 +37,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.setAttribute("level",null);
+        session.invalidate();
         return "index";
     }
 
