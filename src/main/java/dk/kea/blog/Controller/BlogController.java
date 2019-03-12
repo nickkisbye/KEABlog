@@ -25,11 +25,10 @@ public class BlogController {
     }
 
     @PostMapping("/blog/create")
-    public String createBlog(@ModelAttribute (name="Blog") Blog blog) {
-        if (service.createBlog(blog)) {
-            //DO IT
-        }
-        return "redirect:/blog/create";
+    public String createBlog(@ModelAttribute (name="Blog") Blog blog, Model model) {
+        model.addAttribute("message", service.createBlog(blog));
+        model.addAttribute("blogs", service.getBlogPosts());
+        return "blog";
     }
 
     @GetMapping("/blog/delete/{id}")

@@ -8,7 +8,7 @@ public class User {
     private String city;
     private String email;
     private String password;
-    private int age;
+    private Integer age;
     private String date;
 
     private int level;
@@ -19,7 +19,7 @@ public class User {
         super();
     }
 
-    public User(int id, String firstname, String lastname, String city, String email, String password, int age, String date, int level, String roleName, int rid) {
+    public User(int id, String firstname, String lastname, String city, String email, String password, Integer age, String date, int level, String roleName, int rid) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -81,11 +81,11 @@ public class User {
         this.password = password;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

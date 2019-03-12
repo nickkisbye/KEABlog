@@ -25,10 +25,10 @@ public class UserController {
 
     @PostMapping("/user/create")
     public String createUser(@ModelAttribute(name="user") User user, Model model) {
-        if (service.createUser(user)) {
-
-        }
-        return "redirect:/user/create";
+        model.addAttribute("message", service.createUser(user));
+        model.addAttribute("users", service.getUsers());
+        model.addAttribute("roles", service.getRoles());
+        return "createUser";
     }
 
     @GetMapping("/user/delete/{id}")
@@ -46,9 +46,12 @@ public class UserController {
     }
 
     @PostMapping("/user/update")
-    public String updateUser(@ModelAttribute (name="User") User user) {
-        service.updateUser(user);
-        return "redirect:/user/create";
+    public String updateUser(@ModelAttribute (name="User") User user, Model model, int id) {
+        model.addAttribute("message", service.updateUser(user));
+        model.addAttribute("users", service.findUserById(id));
+        model.addAttribute("roles", service.getRoles());
+        //service.updateUser(user);
+        return "editUser";
     }
 
 }

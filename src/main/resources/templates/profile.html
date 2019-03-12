@@ -19,7 +19,7 @@
     <Strong class="nav-link" th:text="${session.date}"></Strong>
     <Strong class="nav-link" th:text="${session.roleName}"></Strong>
     <Strong class="nav-link" th:text="${session.level}"></Strong>
-
+    <div><p th:text="${message}"></p></div>
     <form th:action="@{/profile}" th:object="${user}" method="post">
         <label>New password</label>
         <input type="text" placeholder="password" name="password">

@@ -5,6 +5,7 @@ import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,9 +35,16 @@ public class BlogService {
         return blogList;
     }
 
-    public boolean createBlog(Blog blog) {
-        db.createPost(blog);
-        return true;
+    public String createBlog(Blog blog) {
+        if(blog.getTitle().length() == 0 ) {
+            return "Length of title is too short. Minimum 1 character.";
+        } else if (blog.getText().length() < 2) {
+            return "Length of text is too short. Minimum 3 character.";
+        } else {
+            db.createPost(blog);
+            return "The blog post was successfully created!";
+        }
+
     }
 
     public boolean deleteBlog(int id) {
@@ -61,9 +69,16 @@ public class BlogService {
         return blogList;
     }
 
-    public boolean updateBlog(Blog blog) {
-        db.updateBlog(blog);
-        return true;
+    public String updateBlog(Blog blog) {
+
+        if(blog.getTitle().length() == 0 ) {
+            return "Length of title is too short. Minimum 1 character.";
+        } else if (blog.getText().length() < 2) {
+            return "Length of text is too short. Minimum 3 character.";
+        } else {
+            db.updateBlog(blog);
+            return "The blog post was successfully updated!";
+        }
     }
 
 }

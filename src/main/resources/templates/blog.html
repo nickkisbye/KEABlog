@@ -11,6 +11,8 @@
 
 <h1 class="text-center mt-4"><a href="/admin">Admin</a> > Manage Blogpost</h1>
 
+<div><p th:text="${message}"></p></div>
+
 <form th:action="@{/blog/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">
         <label>Title:</label>

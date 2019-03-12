@@ -45,36 +45,49 @@ public class UserService {
         return false;
     }
 
-    public boolean validateEmail(String email) {
-        String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-
-        Pattern pattern;
-        Matcher matcher;
-
-        pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
-
-        matcher = pattern.matcher(email);
-
-        return matcher.matches();
+    public String changePassword(User user) {
+        if(user.getPassword().length() < 2 || user.getPassword().length() > 16) {
+            return "Password must contain between 3 - 16 characters.";
+        } else {
+            db.newPasswordDB(user);
+            return "You have successfully change your password!";
+        }
     }
 
-    public boolean changePassword(User user) {
+    public String createUser(User user) {
 
-        // CHECK HERE IF PASSWORD IS VALID (4-16 character)
+        if(user.getFirstname().length() < 1 || user.getLastname().length() < 1) {
+            return "First & Last name must be minimum 2 characters.";
+        } else if(user.getCity().length() < 1 || onlyAlphanumeric(user.getCity())) {
+            return "Invalid City name. Minimum 2 characters.";
+        } else if(!validateEmail(user.getEmail())) {
+            return "Invalid email";
+        } else if(user.getPassword().length() < 2 || user.getPassword().length() > 16) {
+            return "Password must contain between 3 - 16 characters.";
+        } else if(user.getAge() == null || user.getAge() > 120 || user.getAge() < 1) {
+            return "Invalid age";
+        } else {
+            db.createUser(user);
+            return "User have successfully been created!";
+        }
 
-        db.newPasswordDB(user);
-        return true;
     }
 
-    public boolean createUser(User user) {
-        db.createUser(user);
-
-        return true;
-    }
-
-    public boolean updateUser(User user) {
-        db.updateUser(user);
-        return true;
+    public String updateUser(User user) {
+        if(user.getFirstname().length() < 1 || user.getLastname().length() < 1) {
+            return "First & Last name must be minimum 2 characters.";
+        } else if(user.getCity().length() < 1 || onlyAlphanumeric(user.getCity())) {
+            return "Invalid City name. Minimum 2 characters.";
+        } else if(!validateEmail(user.getEmail())) {
+            return "Invalid email";
+        } else if(user.getPassword().length() < 2 || user.getPassword().length() > 16) {
+            return "Password must contain between 3 - 16 characters.";
+        } else if(user.getAge() == null || user.getAge() > 120 || user.getAge() < 1) {
+            return "Invalid age";
+        } else {
+            db.updateUser(user);
+            return "User have successfully been updated!";
+        }
     }
 
     public List<User> getUsers() {
@@ -142,6 +155,31 @@ public class UserService {
             e.printStackTrace();
         }
         return userList;
+    }
+
+    public boolean onlyAlphanumeric(String string){
+        String regex = "^[a-zA-Z]+$";
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(string);
+
+        if(matcher.matches()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validateEmail(String email) {
+        String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+
+        Pattern pattern;
+        Matcher matcher;
+
+        pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+
+        matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 
 }

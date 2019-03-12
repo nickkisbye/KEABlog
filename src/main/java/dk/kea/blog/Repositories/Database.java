@@ -174,6 +174,17 @@ public class Database {
         return null;
     }
 
+    public  ResultSet getLatestUsers() {
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id ORDER BY users.id DESC LIMIT 5";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public  ResultSet getRoles() {
         String query = "SELECT * FROM roles";
         try {
