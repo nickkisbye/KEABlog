@@ -3,7 +3,10 @@ package dk.kea.blog.Repositories;
 import dk.kea.blog.Models.Blog;
 import dk.kea.blog.Models.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+
+import static org.codehaus.groovy.runtime.EncodingGroovyMethods.md5;
 
 public class Database {
 
@@ -22,11 +25,12 @@ public class Database {
     }
 
     public ResultSet selectUser(User user) {
-        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id WHERE email = ? AND password = ? ";
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id WHERE email = ? AND password = md5(?) ";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1,user.getEmail());
             preparedStatement.setString(2,user.getPassword());
+
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -35,7 +39,7 @@ public class Database {
     }
 
     public void newPasswordDB(User user){
-        String sql = "UPDATE users SET password = ? WHERE email = ?";
+        String sql = "UPDATE users SET password = md5(?) WHERE email = ?";
         try {
             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1,user.getPassword());
@@ -98,7 +102,7 @@ public class Database {
     }
 
     public void createUser(User user) {
-        String query = "INSERT INTO users(firstName, lastName, city, email, age, password, fk_roles) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users(firstName, lastName, city, email, age, password, fk_roles) VALUES (?, ?, ?, ?, ?, md5(?), ?)";
 
         try {
             preparedStatement = con.prepareStatement(query);
@@ -141,7 +145,7 @@ public class Database {
     }
 
     public void updateUser(User user) {
-        String query = "UPDATE users SET firstName=?, lastName=?, city=?, email=?, age=?, password=?, fk_roles=? WHERE id=?";
+        String query = "UPDATE users SET firstName=?, lastName=?, city=?, email=?, age=?, password=md5(?), fk_roles=? WHERE id=?";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, user.getFirstname());

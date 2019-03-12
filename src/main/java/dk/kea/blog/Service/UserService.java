@@ -5,12 +5,15 @@ import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.codehaus.groovy.runtime.EncodingGroovyMethods.md5;
 
 @Service
 public class UserService {
@@ -19,7 +22,7 @@ public class UserService {
         ResultSet rs = db.selectUser(user);
         try {
             if (rs.next()) {
-                if (rs.getString("email").equals(user.getEmail()) && rs.getString("password").equals(user.getPassword())) {
+                if (rs.getString("email").equals(user.getEmail()) && rs.getString("password").equals(md5(user.getPassword()))) {
                     user.setCity(rs.getString("city"));
                     user.setFirstname(rs.getString("firstName"));
                     user.setLastname(rs.getString("lastName"));
@@ -35,6 +38,8 @@ public class UserService {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return false;
