@@ -38,4 +38,9 @@ public class BlogService {
         return true;
     }
 
+    public boolean deleteBlog(int id) {
+        db.delete("blog", id);
+        return true;
+    }
+
 }

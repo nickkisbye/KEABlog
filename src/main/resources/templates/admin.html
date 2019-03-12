@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
 
 </head>
-<body>
+<body  th:if="${session.level >= 90}">
 <header>
     <div th:replace="fragments/header :: header"></div>
 </header>
 
 <h1>ADMIN</h1>
 
-<a class="nav-link" href="/blog/create">Create blog</a>
-<a class="nav-link" href="/user/create">Create user</a>
+<a class="nav-link" href="/blog/create">Manage blogs</a>
+<a class="nav-link" href="/user/create">Manage users</a>
 
 <footer>
     <div th:replace="fragments/footer :: footer"></div>

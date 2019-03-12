@@ -8,6 +8,9 @@ public class User {
     private String city;
     private String email;
     private String password;
+    private int age;
+    private String date;
+
     private int level;
     private String roleName;
     private int rid;
@@ -16,13 +19,15 @@ public class User {
         super();
     }
 
-    public User(int id, String firstname, String lastname, String city, String email, String password, int level, String roleName, int rid) {
+    public User(int id, String firstname, String lastname, String city, String email, String password, int age, String date, int level, String roleName, int rid) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.city = city;
         this.email = email;
         this.password = password;
+        this.age = age;
+        this.date = date;
         this.level = level;
         this.roleName = roleName;
         this.rid = rid;
@@ -74,6 +79,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getLevel() {

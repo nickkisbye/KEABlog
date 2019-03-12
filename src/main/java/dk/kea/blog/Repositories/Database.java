@@ -69,11 +69,22 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public void delete(String deleteFrom, int id) {
+        String query = "DELETE FROM "+deleteFrom+" WHERE id=?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createUser(User user) {
-        String query = "INSERT INTO users(firstName, lastName, city, email, password, fk_roles) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users(firstName, lastName, city, email, age, password, fk_roles) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             preparedStatement = con.prepareStatement(query);
@@ -81,8 +92,9 @@ public class Database {
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setString(3, user.getCity());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setInt(6, user.getRid());
+            preparedStatement.setInt(5, user.getAge());
+            preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setInt(7, user.getRid());
             preparedStatement.execute();
             preparedStatement.close();
         }  catch (SQLException e) {
@@ -90,8 +102,19 @@ public class Database {
         }
     }
 
-    public  ResultSet getRole() {
-        String query = "SELECT id,name FROM roles";
+    public  ResultSet getUsers() {
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public  ResultSet getRoles() {
+        String query = "SELECT * FROM roles";
         try {
             preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();

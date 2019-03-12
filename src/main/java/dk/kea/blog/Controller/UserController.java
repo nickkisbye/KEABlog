@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -17,6 +18,7 @@ public class UserController {
 
     @GetMapping("/user/create")
     public String getUserForm(Model model) {
+        model.addAttribute("users", service.getUsers());
         model.addAttribute("roles", service.getRoles());
         return "createUser";
     }
@@ -26,6 +28,12 @@ public class UserController {
         if (service.createUser(user)) {
             //DO IT
         }
+        return "redirect:/user/create";
+    }
+
+    @GetMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable("id") int id) {
+        service.deleteUser(id);
         return "redirect:/user/create";
     }
 }

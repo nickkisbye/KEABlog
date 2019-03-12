@@ -26,6 +26,9 @@ public class UserService {
                     user.setRoleName(rs.getString("name"));
                     user.setLevel(rs.getInt("level"));
                     user.setId(rs.getInt("id"));
+                    user.setAge(rs.getInt("age"));
+                    user.setDate(rs.getString("creationdate"));
+
                     return true;
                 } else {
                     return false;
@@ -64,9 +67,32 @@ public class UserService {
         return true;
     }
 
+    public List<User> getUsers() {
+        List<User> userList = new ArrayList<>();
+        ResultSet rs = db.getUsers();
+        try {
+            while (rs.next()) {
+                User user = new User();
+                user.setFirstname(rs.getString("firstName"));
+                user.setLastname(rs.getString("lastName"));
+                user.setCity(rs.getString("city"));
+                user.setAge(rs.getInt("age"));
+                user.setEmail(rs.getString("email"));
+                user.setDate(rs.getString("creationdate"));
+                user.setRoleName(rs.getString("name"));
+                user.setId(rs.getInt("users.id"));
+                user.setRid(rs.getInt("roles.id"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
     public List<User> getRoles() {
         List<User> roleList = new ArrayList<>();
-        ResultSet rs = db.getRole();
+        ResultSet rs = db.getRoles();
         try {
             while (rs.next()) {
                 User user = new User();
@@ -78,6 +104,11 @@ public class UserService {
             e.printStackTrace();
         }
         return roleList;
+    }
+
+    public boolean deleteUser(int id) {
+        db.delete("users", id);
+        return true;
     }
 
 }
