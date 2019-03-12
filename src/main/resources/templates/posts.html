@@ -8,13 +8,12 @@
 <header>
     <div th:replace="fragments/header :: header"></div>
 </header>
-
-<div th:each = "blog: ${blogs}" class="card border-dark mb-3 mt-5" style="margin-left: 13%; max-width: 70rem;">
-    <h2 class="card-header"><p th:text="${blog.title}"></p></h2>
+<div class="card col-md-9 mt-4 mb-3" th:each = "blog: ${blogs}" style="margin-left: 13%">
     <div class="card-body">
-        <p th:text="${blog.date}"></p>
-        <p th:text="${blog.author}"></p>
-        <p class="card-text"><p th:text="${blog.text}"></p></p>
+        <h2 class="card-title"><p th:text="${blog.title}"></p></h2>
+        <p th:text="${blog.author}" class="card-link"></p>
+        <h6 class="card-subtitle mb-2 text-muted"><p th:text="${blog.date}"></p></h6>
+        <p th:text="${blog.text}"></p>
     </div>
 </div>
 

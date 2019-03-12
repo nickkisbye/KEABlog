@@ -21,7 +21,7 @@
             <div th:if="${session.level == null}">
             <form class="form-inline my-2 my-lg-0" th:action="@{/login}" th:object="${User}" method="post">
                 <input type="text" class="form-control" placeholder="Email" name="email">
-                <input type="text" class="form-control ml-2" placeholder="Password" name="password">
+                <input type="password" class="form-control ml-2" placeholder="Password" name="password">
                 <button type="submit" class="btn btn-secondary ml-2">Login</button>
             </form>
             </div>

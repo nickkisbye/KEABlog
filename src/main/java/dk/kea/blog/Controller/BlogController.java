@@ -48,9 +48,10 @@ public class BlogController {
     }
 
     @PostMapping("/blog/update")
-    public String updateUser(@ModelAttribute (name="Blog") Blog blog) {
-        service.updateBlog(blog);
-        return "redirect:/blog/create";
+    public String updateUser(@ModelAttribute (name="Blog") Blog blog, Model model, int id) {
+        model.addAttribute("message", service.updateBlog(blog));
+        model.addAttribute("blogs", service.findBlogById(id));
+        return "editBlog";
     }
 
 }

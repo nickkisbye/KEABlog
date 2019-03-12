@@ -36,7 +36,7 @@ public class BlogService {
     }
 
     public String createBlog(Blog blog) {
-        if(blog.getTitle().length() == 0 ) {
+        if(blog.getTitle().length() < 1 ) {
             return "Length of title is too short. Minimum 1 character.";
         } else if (blog.getText().length() < 2) {
             return "Length of text is too short. Minimum 3 character.";
@@ -71,7 +71,7 @@ public class BlogService {
 
     public String updateBlog(Blog blog) {
 
-        if(blog.getTitle().length() == 0 ) {
+        if(blog.getTitle().length() < 1 ) {
             return "Length of title is too short. Minimum 1 character.";
         } else if (blog.getText().length() < 2) {
             return "Length of text is too short. Minimum 3 character.";

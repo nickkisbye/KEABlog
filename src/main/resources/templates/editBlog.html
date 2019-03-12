@@ -6,9 +6,10 @@
 </head>
 <body  th:if="${session.level >= 90}">
 <header>
-    <div th:replace="fragments/header :: header"></div>½
+    <div th:replace="fragments/header :: header"></div>
 </header>
 <h1 class="text-center mt-4"><a href="/admin">Admin</a> > Edit Blogpost</h1>
+<div><h4 class="text-center mt-3" th:text="${message}"></h4></div>
 <div th:each = "blog: ${blogs}">
 <form th:action="@{/blog/update}" th:object="${Blog}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">
