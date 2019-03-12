@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body  th:if="${session.level >= 90}">
+<header>
+    <div th:replace="fragments/header :: header"></div>½
+</header>
+
+<div th:each = "blog: ${blogs}">
+<form th:action="@{/blog/update}" th:object="${Blog}" method="post" style="margin-left: 20%;">
+    <div class="form-group col-md-9 mt-4">
+        <label>Title:</label>
+        <input type="text" class="form-control" th:value="${blog.title}" name="title">
+    </div>
+    <div class="form-group col-md-9">
+        <label>Body: </label>
+        <textarea name="text" class="form-control" th:text="${blog.text}"></textarea>
+    </div>
+    <div class="form-group col-md-9">
+        <input th:value="${blog.id}" type="hidden" name="id">
+        <button type="submit" class="btn btn-primary btn-block mt-3 col-md-12">Update blogpost</button>
+        <br>
+    </div>
+</form>
+</div>
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

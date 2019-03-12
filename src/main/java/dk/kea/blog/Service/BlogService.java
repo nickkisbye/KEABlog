@@ -1,6 +1,7 @@
 package dk.kea.blog.Service;
 
 import dk.kea.blog.Models.Blog;
+import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,28 @@ public class BlogService {
 
     public boolean deleteBlog(int id) {
         db.delete("blog", id);
+        return true;
+    }
+
+    public List<Blog> findBlogById(int id) {
+        List<Blog> blogList = new ArrayList<>();
+        ResultSet rs = db.findBlogById(id);
+        try {
+            while (rs.next()) {
+                Blog blog = new Blog();
+                blog.setId(rs.getInt("id"));
+                blog.setTitle(rs.getString("title"));
+                blog.setText(rs.getString("text"));
+                blogList.add(blog);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return blogList;
+    }
+
+    public boolean updateBlog(Blog blog) {
+        db.updateBlog(blog);
         return true;
     }
 

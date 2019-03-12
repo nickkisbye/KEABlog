@@ -8,7 +8,6 @@
     <div th:replace="fragments/header :: header"></div>
 </header>
 <div>
-    <h1>Manage users</h1>
     <div th:each = "user: ${users}">
         <form th:action="@{/user/update}" th:object="${User}" method="post" style="margin-left: 20%;">
             <div class="form-group col-md-9 mt-4">
@@ -40,6 +39,7 @@
                 <select name="rid">
                     <option th:each="role: ${roles}" th:value="${role.rid}"><p th:text="${role.roleName}"></p></option>
                 </select>
+                <input type="hidden" th:value="${user.id}" name="id">
                 <button type="submit" class="btn btn-primary btn-block mt-3 col-md-12">Update user</button>
             </div>
         </form>

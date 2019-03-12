@@ -67,6 +67,11 @@ public class UserService {
         return true;
     }
 
+    public boolean updateUser(User user) {
+        db.updateUser(user);
+        return true;
+    }
+
     public List<User> getUsers() {
         List<User> userList = new ArrayList<>();
         ResultSet rs = db.getUsers();

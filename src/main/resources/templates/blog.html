@@ -6,10 +6,10 @@
 </head>
 <body  th:if="${session.level >= 90}">
 <header>
-    <div th:replace="fragments/header :: header"></div>½
+    <div th:replace="fragments/header :: header"></div>
 </header>
 
-<h1>Manage Blogpost</h1>
+<h1 class="text-center mt-4">Manage Blogpost</h1>
 
 <form th:action="@{/blog/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">
@@ -28,7 +28,7 @@
 </form>
 
 
-<table class="table table-hover" style="margin-left: 13%;">
+<table class="table table-hover text-center mt-2">
     <thead>
     <tr>
         <th scope="col">Title</th>
@@ -44,7 +44,7 @@
         <td><p th:text="${blog.text}"></p></td>
         <td><p th:text="${blog.author}"></p></td>
         <td><p th:text="${blog.date}"></p></td>
-        <td><a th:href="@{/blog/delete/{id}(id=${blog.id})}"class="btn btn-danger">Delete</a><a href="" class="btn btn-info ml-2">Edit</a></td>
+        <td><a th:href="@{/blog/delete/{id}(id=${blog.id})}"class="btn btn-danger">Delete</a><a th:href="@{/blog/update/{id}(id=${blog.id})}" class="btn btn-info ml-2">Edit</a></td>
     </tr>
     </tbody>
 </table>

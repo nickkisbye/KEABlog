@@ -45,5 +45,10 @@ public class UserController {
         return "editUser";
     }
 
+    @PostMapping("/user/update")
+    public String updateUser(@ModelAttribute (name="User") User user) {
+        service.updateUser(user);
+        return "redirect:/user/create";
+    }
 
 }

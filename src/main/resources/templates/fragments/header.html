@@ -17,14 +17,14 @@
                     <a class="nav-link" href="/posts">Posts</a>
                 </li>
             </ul>
-            <div th:if="${session.email == null}">
+            <div th:if="${session.level == null}">
             <form class="form-inline my-2 my-lg-0" th:action="@{/login}" th:object="${User}" method="post">
-                <input type="text" placeholder="Email" name="email">
-                <input type="text" placeholder="Password" name="password">
-                <button type="submit">Login</button>
+                <input type="text" class="form-control" placeholder="Email" name="email">
+                <input type="text" class="form-control ml-2" placeholder="Password" name="password">
+                <button type="submit" class="btn btn-secondary ml-2">Login</button>
             </form>
             </div>
-            <div th:if="${session.email != null}">
+            <div th:if="${session.level != null}">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item" >
                         <Strong class="nav-link" th:text="${session.firstName}"></Strong>

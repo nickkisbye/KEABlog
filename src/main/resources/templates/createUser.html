@@ -8,7 +8,7 @@
     <div th:replace="fragments/header :: header"></div>
 </header>
 <div>
-<h1>Manage users</h1>
+<h1 class="text-center mt-4">Manage users</h1>
 
 <form th:action="@{/user/create}" th:object="${Blog}" method="post" style="margin-left: 20%;">
     <div class="form-group col-md-9 mt-4">
@@ -46,7 +46,7 @@
 
 
 
-<table class="table table-hover" style="margin-left: 13%;">
+<table class="table table-hover text-center mt-2" style="">
     <thead>
     <tr>
         <th scope="col">First name</th>

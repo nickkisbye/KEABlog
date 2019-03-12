@@ -71,6 +71,20 @@ public class Database {
         }
     }
 
+    public void updateBlog(Blog blog) {
+        String query = "UPDATE blog SET title=?, text=? WHERE id=?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, blog.getTitle());
+            preparedStatement.setString(2, blog.getText());
+            preparedStatement.setInt(3, blog.getId());
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void delete(String deleteFrom, int id) {
         String query = "DELETE FROM "+deleteFrom+" WHERE id=?";
         try {
@@ -114,8 +128,39 @@ public class Database {
         return null;
     }
 
+    public ResultSet findBlogById(int id) {
+        String query = "SELECT * FROM blog WHERE id = ?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeQuery();
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateUser(User user) {
+        String query = "UPDATE users SET firstName=?, lastName=?, city=?, email=?, age=?, password=?, fk_roles=? WHERE id=?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, user.getFirstname());
+            preparedStatement.setString(2, user.getLastname());
+            preparedStatement.setString(3, user.getCity());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setInt(5, user.getAge());
+            preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setInt(7, user.getRid());
+            preparedStatement.setInt(8,user.getId());
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public  ResultSet getUsers() {
-        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id";
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id ORDER BY users.id DESC";
         try {
             preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();

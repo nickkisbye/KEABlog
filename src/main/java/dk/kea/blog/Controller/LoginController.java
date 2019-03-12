@@ -30,14 +30,14 @@ public class LoginController {
             session.setAttribute("id", user.getId());
             session.setAttribute("age", user.getAge());
             session.setAttribute("date", user.getDate());
-            return "index";
+            return "redirect:/";
         }
         return "index";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.setAttribute("email",null);
+        session.setAttribute("level",null);
         return "index";
     }
 
