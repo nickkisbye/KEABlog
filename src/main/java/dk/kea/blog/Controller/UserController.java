@@ -36,4 +36,13 @@ public class UserController {
         service.deleteUser(id);
         return "redirect:/user/create";
     }
+
+    @GetMapping("/user/update/{id}")
+    public String updateUser(@PathVariable("id") int id, Model model) {
+
+        model.addAttribute("users", service.findUserById(id));
+        return "editUser";
+    }
+
+
 }

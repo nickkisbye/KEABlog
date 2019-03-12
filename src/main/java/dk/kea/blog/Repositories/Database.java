@@ -102,6 +102,18 @@ public class Database {
         }
     }
 
+    public ResultSet findUserById(int id) {
+        String query = "SELECT * FROM users INNER JOIN users ON blog.fk_users = users.id WHERE id = ?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeQuery();
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public  ResultSet getUsers() {
         String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id";
         try {

@@ -111,4 +111,27 @@ public class UserService {
         return true;
     }
 
+    public List<User> findUserById(int id) {
+        List<User> userList = new ArrayList<>();
+        ResultSet rs = db.findUserById(id);
+        try {
+            while (rs.next()) {
+                User user = new User();
+                user.setFirstname(rs.getString("firstName"));
+                user.setLastname(rs.getString("lastName"));
+                user.setCity(rs.getString("city"));
+                user.setAge(rs.getInt("age"));
+                user.setEmail(rs.getString("email"));
+                user.setDate(rs.getString("creationdate"));
+                user.setRoleName(rs.getString("name"));
+                user.setId(rs.getInt("users.id"));
+                user.setRid(rs.getInt("roles.id"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
 }

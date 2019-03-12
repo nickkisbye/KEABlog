@@ -69,7 +69,7 @@
         <td><p th:text="${user.date}"></p></td>
         <td><p th:text="${user.roleName}"></p></td>
 
-        <td><a th:href="@{/user/delete/{id}(id=${user.id})}"class="btn btn-danger">Delete</a><a href="" class="btn btn-info ml-2">Edit</a></td>
+        <td><a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a><a th:href="@{/user/update/{id}(id=${user.id})}" class="btn btn-info ml-2">Edit</a></td>
     </tr>
     </tbody>
 </table>
