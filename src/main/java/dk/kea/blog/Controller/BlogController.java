@@ -33,12 +33,18 @@ public class BlogController {
 
     @GetMapping("/blog/delete/{id}")
     public String deleteBlog(@PathVariable("id") int id) {
-
         if (service.deleteBlog(id)) {
 
         }
-
         return"redirect:/blog/create";
+    }
+
+    @GetMapping("/blogdirect/delete/{id}")
+    public String deletePostDirect(@PathVariable("id") int id) {
+        if (service.deleteBlog(id)) {
+
+        }
+        return"redirect:/posts";
     }
 
     @GetMapping("/blog/update/{id}")

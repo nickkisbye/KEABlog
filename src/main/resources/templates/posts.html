@@ -10,9 +10,16 @@
 </header>
 <div class="card col-md-9 mt-4 mb-3" th:each = "blog: ${blogs}" style="margin-left: 13%">
     <div class="card-body">
-        <h2 class="card-title"><p th:text="${blog.title}"></p></h2>
-        <p th:text="${blog.author}" class="card-link"></p>
-        <h6 class="card-subtitle mb-2 text-muted"><p th:text="${blog.date}"></p></h6>
+        <h2 class="card-title">
+            <p th:text="${blog.title}"></p>
+        </h2>
+        <div th:if="${session.level >= 90}">
+            <a th:href="@{/blogdirect/delete/{id}(id=${blog.id})}"class="btn btn-danger">Delete</a>
+            <a th:href="@{/blog/update/{id}(id=${blog.id})}" class="btn btn-info ml-2">Edit</a>
+        </div>
+        <br>
+        <p class="card-subtitle mb-2 text-muted">Date: <i th:text="${blog.date}"></i></p>
+        <p>By: <i th:text="${blog.author}" class="card-link"></i></p>
         <p th:text="${blog.text}"></p>
     </div>
 </div>
