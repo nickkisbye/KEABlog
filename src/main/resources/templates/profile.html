@@ -7,27 +7,79 @@
 <body th:if="${session.level != null}">
     <header>
         <div th:replace="fragments/header :: header"></div>
+        <link rel="shortcut icon" href="http://designshack.net/favicon.ico">
+        <link rel="icon" href="http://designshack.net/favicon.ico">
+        <link th:href="@{styles.css}" href="../static/styles.css" rel="stylesheet" type="text/css" media="screen"/>
+        <script type="text/javascript" th:src="@{jquery-1.10.2.min.js}"></script>
+
     </header>
 
     <div class="container">
-        <h1>PROFIL</h1>
-        <div>
-            <p class="card-subtitle mb-2 text-muted">First name: <i th:text="${session.firstName}"></i></p>
-            <p class="card-subtitle mb-2 text-muted">Last name: <i th:text="${session.lastName}"></i></p>
-            <p class="card-subtitle mb-2 text-muted">City: <i th:text="${session.city}"></i></p>
-            <p class="card-subtitle mb-2 text-muted">Age: <i th:text="${session.age}"></i></p>
-            <p class="card-subtitle mb-2 text-muted">Date: <i th:text="${session.date}"></i></p>
-            <p class="card-subtitle mb-2 text-muted">Role: <i th:text="${session.roleName}"></i></p>
-        </div>
-        <div><p th:text="${message}"></p></div>
-        <form th:action="@{/profile}" th:object="${user}" method="post">
-            <label>New password</label>
-            <input type="text" placeholder="password" name="password">
-            <input type="hidden" name="email" th:value="${session.email}">
-            <button type="submit">change</button>
-        </form>
-    </div>
+        <div id="w">
+            <div id="content" class="clearfix">
+                <div id="userphoto"><img th:src="@{images/avatar.png}" alt="default avatar"></div>
+                <h1>User Profile</h1>
 
+                <nav id="profiletabs">
+                    <ul class="clearfix">
+                        <li><a href="#bio" class="sel">Profile</a></li>
+                        <li><a href="#activity">Activity</a></li>
+                        <li><a href="#friends">Friends</a></li>
+                    </ul>
+                </nav>
+
+                <section id="bio">
+                    <p class="card-subtitle mb-2 text-muted">First name: <i th:text="${session.firstName}"></i></p>
+                    <p class="card-subtitle mb-2 text-muted">Last name: <i th:text="${session.lastName}"></i></p>
+                    <p class="card-subtitle mb-2 text-muted">City: <i th:text="${session.city}"></i></p>
+                    <p class="card-subtitle mb-2 text-muted">Age: <i th:text="${session.age}"></i></p>
+                    <p class="card-subtitle mb-2 text-muted">Date: <i th:text="${session.date}"></i></p>
+                    <p class="card-subtitle mb-2 text-muted">Role: <i th:text="${session.roleName}"></i></p>
+
+                    <div><p th:text="${message}"></p></div>
+                    <form th:action="@{/profile}" th:object="${user}" method="post">
+                        <label>New password</label>
+                        <input type="text" placeholder="password" name="password">
+                        <input type="hidden" name="email" th:value="${session.email}">
+                        <button type="submit">change</button>
+                    </form>
+                </section>
+
+                <section id="activity" class="hidden">
+                </section>
+
+                <section id="friends" class="hidden">
+                    <p>Friends list:</p>
+
+                    <ul id="friendslist" class="clearfix">
+                        <li><a href="#"><img th:src="@{images/avatar.png}" width="22" height="22"> Username</a></li>
+                        <li><a href="#"><img th:src="@{images/avatar.png}" width="22" height="22"> SomeGuy123</a></li>
+                        <li><a href="#"><img th:src="@{images/avatar.png}" width="22" height="22"> PurpleGiraffe</a></li>
+                    </ul>
+                </section>
+
+                <section id="settings" class="hidden">
+                </section>
+            </div><!-- @end #content -->
+        </div><!-- @end #w -->
+        <script type="text/javascript">
+            $(function(){
+                $('#profiletabs ul li a').on('click', function(e){
+                    e.preventDefault();
+                    var newcontent = $(this).attr('href');
+
+                    $('#profiletabs ul li a').removeClass('sel');
+                    $(this).addClass('sel');
+
+                    $('#content section').each(function(){
+                        if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+                    });
+
+                    $(newcontent).removeClass('hidden');
+                });
+            });
+        </script>
+    </div>
     <footer>
         <div th:replace="fragments/footer :: footer"></div>
     </footer>
