@@ -14,7 +14,9 @@ import java.util.List;
 
 @Service
 public class BlogService {
-    Database db = new Database();
+
+    @Autowired
+    Database db;
     public List<Blog> getBlogPosts() {
         ResultSet rs = db.getBlogPosts();
         List<Blog> blogList = new ArrayList<>();

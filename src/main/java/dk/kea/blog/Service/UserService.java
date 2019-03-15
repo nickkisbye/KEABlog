@@ -3,6 +3,7 @@ package dk.kea.blog.Service;
 
 import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -17,12 +18,13 @@ import static org.codehaus.groovy.runtime.EncodingGroovyMethods.md5;
 
 @Service
 public class UserService {
-    Database db = new Database();
+
+    @Autowired
+    Database db;
     public boolean verifyUser(User user) {
         ResultSet rs = db.selectUser(user);
         try {
             if (rs.next()) {
-                if (rs.getString("email").equals(user.getEmail()) && rs.getString("password").equals(md5(user.getPassword()))) {
                     user.setCity(rs.getString("city"));
                     user.setFirstname(rs.getString("firstName"));
                     user.setLastname(rs.getString("lastName"));
@@ -31,15 +33,12 @@ public class UserService {
                     user.setId(rs.getInt("id"));
                     user.setAge(rs.getInt("age"));
                     user.setDate(rs.getString("creationdate"));
-
                     return true;
                 } else {
                     return false;
                 }
-            }
+
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return false;

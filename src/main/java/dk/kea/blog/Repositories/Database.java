@@ -2,8 +2,11 @@ package dk.kea.blog.Repositories;
 
 import dk.kea.blog.Models.Blog;
 import dk.kea.blog.Models.User;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 
+@Repository
 public class Database {
 
     private Connection con;
