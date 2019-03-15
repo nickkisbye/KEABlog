@@ -1,7 +1,6 @@
 package dk.kea.blog.Controller;
 
 import dk.kea.blog.Models.Blog;
-import dk.kea.blog.Models.User;
 import dk.kea.blog.Service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
