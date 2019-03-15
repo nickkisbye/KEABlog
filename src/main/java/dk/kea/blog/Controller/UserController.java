@@ -49,7 +49,6 @@ public class UserController {
         model.addAttribute("message", service.updateUser(user));
         model.addAttribute("users", service.findUserById(id));
         model.addAttribute("roles", service.getRoles());
-        //service.updateUser(user);
         return "editUser";
     }
 
