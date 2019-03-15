@@ -37,11 +37,10 @@
                     <p class="card-subtitle mb-2 text-muted">Role: <i th:text="${session.roleName}"></i></p>
 
                     <div><p th:text="${message}"></p></div>
-                    <form th:action="@{/profile}" th:object="${user}" method="post">
-                        <label>New password</label>
-                        <input type="text" placeholder="password" name="password">
+                    <form class="form-group" th:action="@{/profile}" th:object="${user}" method="post">
+                        <input class="form-control col-md-6 mr-2 float-left" type="text" placeholder="New password" name="password">
                         <input type="hidden" name="email" th:value="${session.email}">
-                        <button type="submit">change</button>
+                        <button class="btn btn-primary" type="submit">change</button>
                     </form>
                 </section>
 
