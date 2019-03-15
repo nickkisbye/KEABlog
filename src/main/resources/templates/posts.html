@@ -14,7 +14,7 @@
             <p th:text="${blog.title}"></p>
         </h2>
         <div th:if="${session.level >= 90}">
-            <a th:href="@{/blogdirect/delete/{id}(id=${blog.id})}"class="btn btn-danger">Delete</a>
+            <a th:href="@{/blog/delete/{id}(id=${blog.id})}"class="btn btn-danger">Delete</a>
             <a th:href="@{/blog/update/{id}(id=${blog.id})}" class="btn btn-info ml-2">Edit</a>
         </div>
         <br>

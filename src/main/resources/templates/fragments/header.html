@@ -2,7 +2,7 @@
 
 <div th:fragment="header">
     <title>KEA Blog</title>
-<link rel="stylesheet" th:href="@{https://bootswatch.com/4/lux/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/bootstrap.min.css}" type="text/css">
     <script src="bootstrap.js"></script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="http://localhost:8080/">KEA Blog</a>
@@ -29,7 +29,7 @@
             <div th:if="${session.level != null}">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item" >
-                    <img th:src="@{images/avatar.png}" class="float-left mt-2 mr-2" width="22" height="22"> <Strong class="nav-link float-right" th:text="${session.firstName}"></Strong>
+                    <img src="/images/avatar.png" class="float-left mt-2 mr-2" width="22" height="22"> <Strong class="nav-link float-right" th:text="${session.firstName}"></Strong>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">My Profile</a>
