@@ -56,7 +56,11 @@ public class BlogController {
     public String updateUser(@ModelAttribute (name="Blog") Blog blog, Model model, int id) {
         model.addAttribute("message", service.updateBlog(blog));
         model.addAttribute("blogs", service.findBlogById(id));
-        return "editBlog";
+        if (service.updateBlog(blog).equals("The blog post was successfully updated!")) {
+            return getBlogForm(model);
+        } else {
+            return "editBlog";
+        }
     }
 
 }

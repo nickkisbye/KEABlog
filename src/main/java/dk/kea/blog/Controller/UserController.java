@@ -49,7 +49,12 @@ public class UserController {
         model.addAttribute("message", service.updateUser(user));
         model.addAttribute("users", service.findUserById(id));
         model.addAttribute("roles", service.getRoles());
-        return "editUser";
+
+        if (service.updateUser(user).equals("User have successfully been updated!")) {
+            return getUserForm(model);
+        } else {
+            return "editUser";
+        }
     }
 
 }
