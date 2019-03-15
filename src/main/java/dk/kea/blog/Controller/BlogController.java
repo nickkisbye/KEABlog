@@ -19,7 +19,6 @@ public class BlogController {
     @GetMapping("/blog/create")
     public String getBlogForm(Model model) {
         model.addAttribute("blogs", service.getBlogPosts());
-
         return "blog";
     }
 
