@@ -43,7 +43,7 @@
     <tbody>
     <tr th:each = "blog: ${blogs}">
         <th th:text="${blog.title}" scope="row"></th>
-        <td><p th:text="${blog.text}" style="white-space: nowrap; width: 920px; overflow: hidden; text-overflow: ellipsis; "></p></td>
+        <td><p th:text="${blog.text}" style="white-space: nowrap; width: 450px; overflow: hidden; text-overflow: ellipsis; "></p></td>
         <td><p th:text="${blog.author}"></p></td>
         <td><p th:text="${blog.date}"></p></td>
         <td><a th:href="@{/blog/delete/{id}(id=${blog.id})}"class="btn btn-danger">Delete</a><a th:href="@{/blog/update/{id}(id=${blog.id})}" class="btn btn-info ml-2">Edit</a></td>
