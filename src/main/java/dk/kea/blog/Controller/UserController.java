@@ -16,6 +16,12 @@ public class UserController {
     @Autowired
     UserService service;
 
+    @GetMapping("/userlist")
+    public String getUserList(Model model) {
+        model.addAttribute("users", service.getUsers());
+        return "users";
+    }
+
     @GetMapping("/user/create")
     public String getUserForm(Model model) {
         model.addAttribute("users", service.getUsers());

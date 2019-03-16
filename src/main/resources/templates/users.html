@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+
+<div>
+    <h1>All users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user: ${users}">
+
+                <td><p th:text="${user.firstname}"></p></td>
+                <td><p th:text="${user.lastname}"></p></td>
+                <td><a th:href="@{/userprofile/{id}(id=${user.id})}">profile</a></td>
+
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>

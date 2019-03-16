@@ -1,0 +1,20 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header>
+    <div th:replace="fragments/header :: header"></div>
+</header>
+<div th:each="user : ${users}">
+    <p th:text="${user.firstname}"></p>
+    <a th:href="@{/addfriend/{id}/{sid} (id=${user.id},sid=${session.id})}">Add friend</a>
+</div>
+
+<footer>
+    <div th:replace="fragments/footer :: footer"></div>
+
+</footer>
+</body>
+</html>

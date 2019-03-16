@@ -1,6 +1,7 @@
 package dk.kea.blog.Service;
 
 
+import dk.kea.blog.Models.Friendship;
 import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,4 +182,36 @@ public class UserService {
         return matcher.matches();
     }
 
+    public List<Friendship> getFriendsRequest(int id) {
+        List<Friendship> friendsRequest = new ArrayList<>();
+        ResultSet rs = db.getFriendRequests(id);
+        try {
+            while (rs.next()) {
+                Friendship friendship = new Friendship();
+                friendship.setId(rs.getInt("friends.id"));
+                friendship.setUsernameFrom(rs.getString("firstname"));
+                friendsRequest.add(friendship);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return friendsRequest;
+    }
+
+    public List<Friendship> getFriends(int id) {
+        List<Friendship> friends = new ArrayList<>();
+        ResultSet rs = db.getFriends(id);
+        try {
+            while (rs.next()) {
+                Friendship friendship = new Friendship();
+                friendship.setId(rs.getInt("friends.id"));
+                friendship.setUsernameFrom(rs.getString("firstname"));
+                friendship.setUser1(rs.getInt("users.id"));
+                friends.add(friendship);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return friends;
+    }
 }
