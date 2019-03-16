@@ -18,7 +18,7 @@ public class LoginController {
     UserService userService;
 
     @PostMapping(value="/login")
-    public String login(@ModelAttribute (name="User") User user, Model model, HttpSession session) {
+    public String login(@ModelAttribute (name="User") User user, HttpSession session) {
 
         if (userService.verifyUser(user)) {
             session.setAttribute("email",       user.getEmail());

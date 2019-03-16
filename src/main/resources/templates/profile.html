@@ -48,7 +48,7 @@
                 </section>
 
                 <section id="friends" class="hidden">
-                    <div th:if="${friendrequests != null}">
+                    <div th:if="${friend}">
                     <p>Friend requests:</p>
                         <div th:each="friendrequest : ${friendrequests}">
                             <p th:text="${friendrequest.usernameFrom}"></p>

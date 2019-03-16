@@ -15,7 +15,12 @@ public class ProfileController {
 
     @GetMapping("/profile/{id}")
     public String profile(@PathVariable ("id") int id, Model model) {
-        model.addAttribute("friendrequests", userService.getFriendsRequest(id));
+        if (userService.getFriendsRequest(id).isEmpty()) {
+            model.addAttribute("friend", false);
+        } else {
+            model.addAttribute("friend", true);
+            model.addAttribute("friendrequests", userService.getFriendsRequest(id));
+        }
         model.addAttribute("friends", userService.getFriends(id));
         return "profile";
     }
