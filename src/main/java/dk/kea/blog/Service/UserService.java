@@ -190,7 +190,7 @@ public class UserService {
             while (rs.next()) {
                 Friendship friendship = new Friendship();
                 friendship.setId(rs.getInt("friends.id"));
-                friendship.setUsernameFrom(rs.getString("firstname"));
+                friendship.setUsername1(rs.getString("firstname"));
                 friendsRequest.add(friendship);
             }
         } catch (SQLException e) {
@@ -205,7 +205,13 @@ public class UserService {
         try {
             while (rs.next()) {
                 Friendship friendship = new Friendship();
-                friendship.setId(rs.getInt("id"));
+                if (rs.getInt("u1.id") == id) {
+                    friendship.setUsername1(rs.getString("u2.firstname"));
+                    friendship.setId(rs.getInt("u2.id"));
+                } else {
+                    friendship.setUsername1(rs.getString("u1.firstname"));
+                    friendship.setId(rs.getInt("u1.id"));
+                }
                 friends.add(friendship);
             }
         } catch (SQLException e) {

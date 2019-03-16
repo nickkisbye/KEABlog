@@ -51,7 +51,7 @@
                     <div th:if="${friend}">
                     <p>Friend requests:</p>
                         <div th:each="friendrequest : ${friendrequests}">
-                            <p th:text="${friendrequest.usernameFrom}"></p>
+                            <p th:text="${friendrequest.username1}"></p>
                             <a th:href="@{/acceptfriend/{id}/{sid} (id=${friendrequest.id},sid=${session.id})}">accept</a>
                             <a th:href="@{/deletefriend/{id}/{sid} (id=${friendrequest.id},sid=${session.id})}">deny</a>
                         </div>
@@ -61,7 +61,7 @@
 
                     <ul id="friendslist" class="clearfix" th:each="friend: ${friends}">
 
-                        <li><a th:href="@{/userprofile/{id}(id=${friend.id})}"><p th:text="${friend.id}"></p></a></li>
+                        <li><a th:href="@{/userprofile/{id}(id=${friend.id})}"><p th:text="${friend.username1}"></p></a></li>
                     </ul>
                 </section>
 

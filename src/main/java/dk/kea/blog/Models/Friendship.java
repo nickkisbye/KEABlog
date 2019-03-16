@@ -3,7 +3,7 @@ package dk.kea.blog.Models;
 public class Friendship {
 
     private int id;
-    private String usernameFrom;
+    private String username1;
     private int user1;
     private int user2;
     private boolean isFriends;
@@ -66,11 +66,12 @@ public class Friendship {
         this.friendshipDate = friendshipDate;
     }
 
-    public String getUsernameFrom() {
-        return usernameFrom;
+    public String getUsername1() {
+        return username1;
     }
 
-    public void setUsernameFrom(String usernameFrom) {
-        this.usernameFrom = usernameFrom;
+    public void setUsername1(String username1) {
+        this.username1 = username1;
     }
+
 }
