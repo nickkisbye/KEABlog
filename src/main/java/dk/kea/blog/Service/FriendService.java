@@ -5,6 +5,11 @@ import dk.kea.blog.Repositories.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FriendService {
 
@@ -21,5 +26,42 @@ public class FriendService {
 
     public void addFriend(Friendship friendship) {
         db.addFriend(friendship);
+    }
+
+    public List<Friendship> getFriendsRequest(int id) {
+        List<Friendship> friendsRequest = new ArrayList<>();
+        ResultSet rs = db.getFriendRequests(id);
+        try {
+            while (rs.next()) {
+                Friendship friendship = new Friendship();
+                friendship.setId(rs.getInt("friends.id"));
+                friendship.setUsername1(rs.getString("firstname"));
+                friendsRequest.add(friendship);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return friendsRequest;
+    }
+
+    public List<Friendship> getFriends(int id) {
+        List<Friendship> friends = new ArrayList<>();
+        ResultSet rs = db.getFriends(id);
+        try {
+            while (rs.next()) {
+                Friendship friendship = new Friendship();
+                if (rs.getInt("u1.id") == id) {
+                    friendship.setUsername1(rs.getString("u2.firstname"));
+                    friendship.setId(rs.getInt("u2.id"));
+                } else {
+                    friendship.setUsername1(rs.getString("u1.firstname"));
+                    friendship.setId(rs.getInt("u1.id"));
+                }
+                friends.add(friendship);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return friends;
     }
 }

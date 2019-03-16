@@ -1,6 +1,7 @@
 package dk.kea.blog.Controller;
 
 import dk.kea.blog.Models.User;
+import dk.kea.blog.Service.FriendService;
 import dk.kea.blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ProfileController {
 
+    @Autowired
+    FriendService friendService;
+
     @GetMapping("/profile/{id}")
     public String profile(@PathVariable ("id") int id, Model model) {
-        if (userService.getFriendsRequest(id).isEmpty()) {
+        if (friendService.getFriendsRequest(id).isEmpty()) {
             model.addAttribute("friend", false);
         } else {
             model.addAttribute("friend", true);
-            model.addAttribute("friendrequests", userService.getFriendsRequest(id));
+            model.addAttribute("friendrequests", friendService.getFriendsRequest(id));
         }
-        model.addAttribute("friends", userService.getFriends(id));
+        model.addAttribute("friends", friendService.getFriends(id));
         return "profile";
     }
 
