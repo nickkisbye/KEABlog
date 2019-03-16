@@ -224,7 +224,10 @@ public class Database {
     }
 
     public ResultSet getFriends(int id) {
-        String query = "SELECT * FROM friends WHERE fk_userIdTwo=? OR fk_userIdOne=? AND isFriends ";
+        String query = "SELECT * FROM friends" +
+                " INNER JOIN users as u1 on fk_userIdOne = u1.id" +
+                " INNER JOIN users as u2 on fk_userIdTwo = u2.id" +
+                " WHERE (u1.id=? OR u2.id=?) AND isFriends ";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
