@@ -224,18 +224,18 @@ public class Database {
     }
 
     public ResultSet getFriends(int id) {
-        String query = "SELECT * FROM friends " +
-                "INNER JOIN users ON friends.fk_userIdOne = users.id " +
-                "WHERE fk_userIdTwo=? AND isFriends";
+        String query = "SELECT * FROM friends WHERE fk_userIdTwo=? OR fk_userIdOne=? AND isFriends ";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, id);
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
 
     public void acceptFriendRequest(int id) {
         String query = "UPDATE friends SET isFriends = true WHERE id = ?";

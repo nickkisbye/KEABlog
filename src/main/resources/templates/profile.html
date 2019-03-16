@@ -61,7 +61,7 @@
 
                     <ul id="friendslist" class="clearfix" th:each="friend: ${friends}">
 
-                        <li><a th:href="@{/userprofile/{id}(id=${friend.user1})}"><img th:src="@{/images/avatar.png}" width="22" height="22"><p th:text="${friend.usernameFrom}"></p></a></li>
+                        <li><a th:href="@{/userprofile/{id}(id=${friend.id})}"><p th:text="${friend.id}"></p></a></li>
                     </ul>
                 </section>
 
