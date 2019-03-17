@@ -16,7 +16,7 @@ public class Database {
     public Database() {
         try {
             this.con = DriverManager.getConnection(
-                    "jdbc:mysql://den1.mysql5.gear.host/blogapp",
+                    "jdbc:mysql://den1.mysql5.gear.host/blogapp?useTimezone=true&serverTimezone=GMT%2B8",
                     "blogapp",
                     "Qm1bh3_u_YYJ");
         } catch (SQLException e) {
