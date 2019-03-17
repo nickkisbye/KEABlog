@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ProfileController {
 
@@ -39,10 +41,11 @@ public class ProfileController {
         return "profile";
     }
 
-    @GetMapping("/userprofile/{id}/{sid}")
-    public String userProfile(@PathVariable("id") int id, @PathVariable("sid") int sid, Model model) {
+    @GetMapping("/userprofile/{id}")
+    public String userProfile(@PathVariable("id") int id, Model model, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("id");
         model.addAttribute("users", userService.findUserById(id));
-        model.addAttribute("friends", friendService.isFriends(id, sid));
+        model.addAttribute("friends", friendService.isFriends(id, userId));
         return "userProfile";
     }
 

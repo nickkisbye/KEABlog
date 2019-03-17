@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class BlogController {
 
@@ -30,19 +32,11 @@ public class BlogController {
     }
 
     @GetMapping("/blog/delete/{id}")
-    public String deleteBlog(@PathVariable("id") int id) {
-        if (service.deleteBlog(id)) {
+    public String deleteBlog(@PathVariable("id") int id, HttpSession session) {
 
-        }
+        service.deleteBlog(id, session);
+
         return"redirect:/blog/create";
-    }
-
-    @GetMapping("/blogdirect/delete/{id}")
-    public String deletePostDirect(@PathVariable("id") int id) {
-        if (service.deleteBlog(id)) {
-
-        }
-        return"redirect:/posts";
     }
 
     @GetMapping("/blog/update/{id}")

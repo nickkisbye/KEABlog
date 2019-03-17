@@ -19,20 +19,21 @@ public class FriendsController {
     @Autowired
     FriendService service;
 
-    @GetMapping("/acceptfriend/{id}/{sid}")
-    public String acceptFriend(@PathVariable("id") int id, @PathVariable("sid") int sid, HttpSession session) {
+    @GetMapping("/acceptfriend/{id}")
+    public String acceptFriend(@PathVariable("id") int id, HttpSession session) {
         service.acceptFriendRequest(id);
-        return "redirect:/profile/{sid}";
+        return "redirect:/profile/" + session.getAttribute("id");
     }
 
-    @GetMapping("/deletefriend/{id}/{sid}")
-    public String deleteFriendRequest(@PathVariable("id") int id, @PathVariable("sid") int sid) {
+    @GetMapping("/deletefriend/{id}")
+    public String deleteFriendRequest(@PathVariable("id") int id, HttpSession session) {
         service.deleteFriendRequest(id);
-        return "redirect:/profile/{sid}";
+        return "redirect:/profile/" + session.getAttribute("id");
     }
 
-    @GetMapping("/addfriend/{id}/{sid}")
-    public String addFriend(@PathVariable("id") int id, @PathVariable("sid") int sid) {
+    @GetMapping("/addfriend/{id}")
+    public String addFriend(@PathVariable("id") int id, HttpSession session) {
+        Integer sid = (Integer) session.getAttribute("id");
         Friendship friendship = new Friendship(sid, id);
         service.addFriend(friendship);
         return "userProfile";

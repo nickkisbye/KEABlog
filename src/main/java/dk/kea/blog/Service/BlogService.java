@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,9 +50,11 @@ public class BlogService {
 
     }
 
-    public boolean deleteBlog(int id) {
-        db.delete("blog", id);
-        return true;
+    public void deleteBlog(int id, HttpSession session) {
+        Integer inSession = (Integer) session.getAttribute("id");
+        if (inSession != null) {
+            db.delete("blog", id);
+        }
     }
 
     public List<Blog> findBlogById(int id) {

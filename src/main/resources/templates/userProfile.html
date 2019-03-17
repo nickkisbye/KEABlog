@@ -9,7 +9,7 @@
 </header>
 <div th:each="user : ${users}">
     <p th:text="${user.firstname}"></p>
-    <a th:if="${session.id != user.id && session.id != null && !friends}" th:href="@{/addfriend/{id}/{sid} (id=${user.id},sid=${session.id})}">Add friend</a>
+    <a th:if="${session.id != user.id && session.id != null && !friends}" th:href="@{/addfriend/{id} (id=${user.id})}">Add friend</a>
 </div>
 
 <footer>

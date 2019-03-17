@@ -4,6 +4,8 @@ import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -126,9 +128,11 @@ public class UserService {
         return roleList;
     }
 
-    public boolean deleteUser(int id) {
-        db.delete("users", id);
-        return true;
+    public void deleteUser(int id, HttpSession session) {
+        Integer inSession = (Integer) session.getAttribute("id");
+        if (inSession != null) {
+            db.delete("users", id);
+        }
     }
 
     public List<User> findUserById(int id) {

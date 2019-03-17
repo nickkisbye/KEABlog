@@ -1,7 +1,6 @@
 package dk.kea.blog.Controller;
 
 import dk.kea.blog.Models.User;
-import dk.kea.blog.Service.FriendService;
 import dk.kea.blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -39,8 +40,8 @@ public class UserController {
     }
 
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        service.deleteUser(id);
+    public String deleteUser(@PathVariable("id") int id, HttpSession session) {
+        service.deleteUser(id, session);
         return "redirect:/user/create";
     }
 

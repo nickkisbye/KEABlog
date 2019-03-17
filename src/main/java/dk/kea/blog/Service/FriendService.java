@@ -25,10 +25,10 @@ public class FriendService {
     }
 
     public void addFriend(Friendship friendship) {
-        db.addFriend(friendship);
+        if (friendship.getUser1() > 0) {
+            db.addFriend(friendship);
+        }
     }
-
-    public void deleteFriendsFromDeletedUser(int id) { db.deleteFriendsFromDeletedUser(id); }
 
     public List<Friendship> getFriendsRequest(int id) {
         List<Friendship> friendsRequest = new ArrayList<>();
@@ -67,7 +67,10 @@ public class FriendService {
         return friends;
     }
 
-    public boolean isFriends(int id, int sid) {
+    public boolean isFriends(int id, Integer sid) {
+        if (sid == null) {
+            sid = 0;
+        }
         ResultSet rs = db.checkForFriends(id, sid);
         try {
             return rs.next();
