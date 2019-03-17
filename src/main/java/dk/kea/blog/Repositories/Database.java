@@ -61,6 +61,17 @@ public class Database {
         return null;
     }
 
+    public ResultSet getLatestBlogPosts() {
+        String query = "SELECT * FROM blog INNER JOIN users ON blog.fk_users = users.id ORDER BY blog.id DESC LIMIT 4";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void createPost(Blog blog) {
         String query = "INSERT INTO blog (title, text, fk_users) VALUES (?,?,?)";
         try {
@@ -175,8 +186,8 @@ public class Database {
         return null;
     }
 
-    public  ResultSet getLatestUsers() {
-        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id ORDER BY users.id DESC LIMIT 5";
+    public  ResultSet getLatestUser() {
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id ORDER BY users.id DESC LIMIT 4";
         try {
             preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();

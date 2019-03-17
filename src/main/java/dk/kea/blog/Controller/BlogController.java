@@ -20,14 +20,14 @@ public class BlogController {
 
     @GetMapping("/blog/create")
     public String getBlogForm(Model model) {
-        model.addAttribute("blogs", service.getBlogPosts());
+        model.addAttribute("blogs", service.getBlogPosts("all"));
         return "blog";
     }
 
     @PostMapping("/blog/create")
     public String createBlog(@ModelAttribute (name="Blog") Blog blog, Model model) {
         model.addAttribute("message", service.createBlog(blog));
-        model.addAttribute("blogs", service.getBlogPosts());
+        model.addAttribute("blogs", service.getBlogPosts("all"));
         return "blog";
     }
 

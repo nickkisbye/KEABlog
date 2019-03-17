@@ -32,13 +32,13 @@ public class LoginController {
             session.setAttribute("date",        user.getDate());
             return "redirect:/";
         }
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "index";
+        return "redirect:/";
     }
 
 }

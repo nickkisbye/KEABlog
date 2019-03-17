@@ -17,20 +17,21 @@ public class MenuController {
     UserService userService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("latestusers", userService.getUsers("latest"));
         return "index";
     }
 
     @GetMapping("/admin")
     public String admin(Model model) {
-        model.addAttribute("blogs", blogService.getBlogPosts());
-        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("blogs", blogService.getBlogPosts("latest"));
+        model.addAttribute("users", userService.getUsers("latest"));
         return "admin";
     }
 
     @GetMapping("/posts")
     public String post(Model model) {
-        model.addAttribute("blogs",blogService.getBlogPosts());
+        model.addAttribute("blogs",blogService.getBlogPosts("all"));
         return "posts";
     }
 

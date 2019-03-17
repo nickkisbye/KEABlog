@@ -20,13 +20,13 @@ public class UserController {
 
     @GetMapping("/userlist")
     public String getUserList(Model model) {
-        model.addAttribute("users", service.getUsers());
+        model.addAttribute("users", service.getUsers("all"));
         return "users";
     }
 
     @GetMapping("/user/create")
     public String getUserForm(Model model) {
-        model.addAttribute("users", service.getUsers());
+        model.addAttribute("users", service.getUsers("all"));
         model.addAttribute("roles", service.getRoles());
         return "createUser";
     }
@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/user/create")
     public String createUser(@ModelAttribute(name="user") User user, Model model) {
         model.addAttribute("message", service.createUser(user));
-        model.addAttribute("users", service.getUsers());
+        model.addAttribute("users", service.getUsers("all"));
         model.addAttribute("roles", service.getRoles());
         return "createUser";
     }

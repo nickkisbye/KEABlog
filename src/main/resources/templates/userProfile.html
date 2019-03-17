@@ -6,10 +6,71 @@
 <body>
 <header>
     <div th:replace="fragments/header :: header"></div>
+    <link rel="shortcut icon" href="http://designshack.net/favicon.ico">
+    <link rel="icon" href="http://designshack.net/favicon.ico">
+    <link th:href="@{/styles.css}" href="../static/styles.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" th:src="@{/jquery-1.10.2.min.js}"></script>
 </header>
-<div th:each="user : ${users}">
-    <p th:text="${user.firstname}"></p>
-    <a th:if="${session.id != user.id && session.id != null && !friends}" th:href="@{/addfriend/{id} (id=${user.id})}">Add friend</a>
+<div class="container">
+    <div id="w">
+        <div id="content" class="clearfix" th:each="user : ${users}">
+            <div id="userphoto"><img th:src="@{/images/avatar.png}" alt="default avatar"></div>
+            <h1>User Profile</h1>
+
+            <nav id="profiletabs">
+                <ul class="clearfix">
+                    <li><a href="#bio" class="sel">Profile</a></li>
+                    <li><a href="#activity">Activity</a></li>
+                    <li><a href="#friends">Friends</a></li>
+                    <a th:if="${session.id != user.id && session.id != null && !friends}" th:href="@{/addfriend/{id} (id=${user.id})}">Add friend</a>
+                </ul>
+            </nav>
+
+            <section id="bio">
+                <p class="card-subtitle mb-2 text-muted">First name: <i th:text="${user.firstname}"></i></p>
+                <p class="card-subtitle mb-2 text-muted">Last name: <i th:text="${user.lastname}"></i></p>
+                <p class="card-subtitle mb-2 text-muted">City: <i th:text="${user.city}"></i></p>
+                <p class="card-subtitle mb-2 text-muted">Age: <i th:text="${user.age}"></i></p>
+                <p class="card-subtitle mb-2 text-muted">Date: <i th:text="${user.date}"></i></p>
+                <p class="card-subtitle mb-2 text-muted">Role: <i th:text="${user.roleName}"></i></p>
+            </section>
+
+            <section id="activity" class="hidden">
+            </section>
+
+            <section id="friends" class="hidden">
+                <p>Friends list:</p>
+                <br>
+                <ul class="list-group" th:each="friend: ${friendlist}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                        <a th:href="@{/userprofile/{id} (id=${friend.id})}"><p th:text="${friend.username1}"></p></a>
+                        <img src="/images/avatar.png" width="22" height="22">
+                    </li>
+                </ul>
+
+            </section>
+
+            <section id="settings" class="hidden">
+            </section>
+        </div><!-- @end #content -->
+    </div><!-- @end #w -->
+    <script type="text/javascript">
+        $(function(){
+            $('#profiletabs ul li a').on('click', function(e){
+                e.preventDefault();
+                var newcontent = $(this).attr('href');
+
+                $('#profiletabs ul li a').removeClass('sel');
+                $(this).addClass('sel');
+
+                $('#content section').each(function(){
+                    if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+                });
+
+                $(newcontent).removeClass('hidden');
+            });
+        });
+    </script>
 </div>
 
 <footer>

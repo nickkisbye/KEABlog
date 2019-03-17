@@ -18,8 +18,14 @@ public class BlogService {
 
     @Autowired
     Database db;
-    public List<Blog> getBlogPosts() {
-        ResultSet rs = db.getBlogPosts();
+    public List<Blog> getBlogPosts(String amount) {
+        ResultSet rs = null;
+        if (amount.equals("all")) {
+            rs = db.getBlogPosts();
+        } else if (amount.equals("latest")) {
+            rs = db.getLatestBlogPosts();
+        }
+
         List<Blog> blogList = new ArrayList<>();
         try {
             while (rs.next()) {

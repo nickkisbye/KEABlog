@@ -9,25 +9,19 @@
 </header>
 
 <div>
-    <h1>All users</h1>
-    <table>
+    <table class="table table-hover mt-4 col-md-9" style="margin-left: 12%;">
         <thead>
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-            </tr>
+        <tr class="table-info">
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col"></th>
+        </tr>
         </thead>
-        <tbody>
-            <tr th:each="user: ${users}">
-
-                <td><p th:text="${user.firstname}"></p></td>
-                <td><p th:text="${user.lastname}"></p></td>
-
-                <td><a th:href="@{/userprofile/{id} (id=${user.id})}">profile</a></td>
-
-            </tr>
-        </tbody>
-
+        <tr th:each="user: ${users}">
+            <th scope="row"><p th:text="${user.firstname}"></p></th>
+            <td><p th:text="${user.lastname}"></p></td>
+            <td class="text-center"><form th:action="@{/userprofile/{id} (id=${user.id})}"><button type="submit" class="btn btn-info float-right">View Profile</button></form></td>
+        </tr>
     </table>
 </div>
 

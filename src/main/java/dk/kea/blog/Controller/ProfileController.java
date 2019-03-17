@@ -45,6 +45,7 @@ public class ProfileController {
     public String userProfile(@PathVariable("id") int id, Model model, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("id");
         model.addAttribute("users", userService.findUserById(id));
+        model.addAttribute("friendlist", friendService.getFriends(id));
         model.addAttribute("friends", friendService.isFriends(id, userId));
         return "userProfile";
     }

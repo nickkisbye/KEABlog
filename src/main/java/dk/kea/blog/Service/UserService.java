@@ -87,9 +87,14 @@ public class UserService {
         }
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers(String amount) {
         List<User> userList = new ArrayList<>();
-        ResultSet rs = db.getUsers();
+        ResultSet rs = null;
+        if (amount.equals("all")) {
+            rs = db.getUsers();
+        } else if (amount.equals("latest")) {
+            rs = db.getLatestUser();
+        }
         try {
             while (rs.next()) {
                 User user = new User();

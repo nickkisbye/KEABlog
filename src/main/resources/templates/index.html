@@ -8,7 +8,24 @@
         <div th:replace="fragments/header :: header"></div>
     </header>
 
-    <h1>INDEXD</h1>
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Welcome!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Register User</a>
+        </p>
+    </div>
+
+    <h4 class="ml-5">Welcome to the newest users</h4>
+    <div class="card text-white bg-info ml-5 mt-2 float-left" style="width: 26rem;" th:each="user : ${latestusers}">
+        <div class="card-header"><p class="float-left" th:text="'Joined: ' + ${user.date}"> <p class="float-right" th:if="${user.level >= 90}"><i class="em em-star"></i></p> </div>
+        <div class="card-body">
+            <h4 class="card-title"><p th:text="${user.firstname + ' ' + user.lastname}"></p></p></h4>
+            <p class="card-text"><a th:href="@{/userprofile/{id}(id=${user.id})}">View Profile</a></p>
+        </div>
+    </div>
 
     <footer>
         <div th:replace="fragments/footer :: footer"></div>
