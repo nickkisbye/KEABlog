@@ -129,9 +129,12 @@ public class UserService {
     }
 
     public void deleteUser(int id, HttpSession session) {
+        Integer requiredLevel = (Integer) session.getAttribute("level");
         Integer inSession = (Integer) session.getAttribute("id");
         if (inSession != null) {
+        if (requiredLevel >= 90) {
             db.delete("users", id);
+        }
         }
     }
 

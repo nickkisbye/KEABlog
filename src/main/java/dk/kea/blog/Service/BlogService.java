@@ -51,9 +51,12 @@ public class BlogService {
     }
 
     public void deleteBlog(int id, HttpSession session) {
+        Integer requiredLevel = (Integer) session.getAttribute("level");
         Integer inSession = (Integer) session.getAttribute("id");
         if (inSession != null) {
-            db.delete("blog", id);
+            if (requiredLevel >= 90) {
+                db.delete("blog", id);
+            }
         }
     }
 
