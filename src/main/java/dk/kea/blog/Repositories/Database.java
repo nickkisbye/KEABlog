@@ -90,6 +90,7 @@ public class Database {
     }
 
     public void delete(String deleteFrom, int id) {
+        deleteFriendsFromDeletedUser(id);
         String query = "DELETE FROM "+deleteFrom+" WHERE id=?";
         try {
             preparedStatement = con.prepareStatement(query);

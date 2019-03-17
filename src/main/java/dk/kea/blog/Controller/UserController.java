@@ -17,9 +17,6 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @Autowired
-    FriendService friendService;
-
     @GetMapping("/userlist")
     public String getUserList(Model model) {
         model.addAttribute("users", service.getUsers());
@@ -43,7 +40,6 @@ public class UserController {
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        friendService.deleteFriendsFromDeletedUser(id);
         service.deleteUser(id);
         return "redirect:/user/create";
     }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class FriendsController {
 
@@ -18,7 +20,7 @@ public class FriendsController {
     FriendService service;
 
     @GetMapping("/acceptfriend/{id}/{sid}")
-    public String acceptFriend(@PathVariable("id") int id, @PathVariable("sid") int sid) {
+    public String acceptFriend(@PathVariable("id") int id, @PathVariable("sid") int sid, HttpSession session) {
         service.acceptFriendRequest(id);
         return "redirect:/profile/{sid}";
     }
