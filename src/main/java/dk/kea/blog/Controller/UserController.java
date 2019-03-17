@@ -1,6 +1,7 @@
 package dk.kea.blog.Controller;
 
 import dk.kea.blog.Models.User;
+import dk.kea.blog.Service.FriendService;
 import dk.kea.blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class UserController {
 
     @Autowired
     UserService service;
+
+    @Autowired
+    FriendService friendService;
 
     @GetMapping("/userlist")
     public String getUserList(Model model) {
@@ -39,6 +43,7 @@ public class UserController {
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
+        friendService.deleteFriendsFromDeletedUser(id);
         service.deleteUser(id);
         return "redirect:/user/create";
     }

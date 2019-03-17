@@ -263,4 +263,32 @@ public class Database {
         }
     }
 
+    public void deleteFriendsFromDeletedUser(int id) {
+        String query = "DELETE FROM friends WHERE fk_userIdOne=? OR fk_userIdTwo=?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ResultSet checkForFriends(int id, int sid) {
+        String query = "SELECT * FROM friends WHERE (fk_userIdOne=? AND fk_userIdTwo=?) OR (fk_userIdOne=? AND fk_userIdTwo=?)";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, sid);
+            preparedStatement.setInt(3, sid);
+            preparedStatement.setInt(4, id);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

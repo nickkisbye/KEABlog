@@ -22,7 +22,8 @@
 
                 <td><p th:text="${user.firstname}"></p></td>
                 <td><p th:text="${user.lastname}"></p></td>
-                <td><a th:href="@{/userprofile/{id}(id=${user.id})}">profile</a></td>
+
+                <td><a th:href="@{/userprofile/{id}/{sid} (id=${user.id},sid=${session.id})}">profile</a></td>
 
             </tr>
         </tbody>

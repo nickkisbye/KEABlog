@@ -61,7 +61,7 @@
 <br>
                     <ul class="list-group" th:each="friend: ${friends}">
                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                            <a th:href="@{/userprofile/{id}(id=${friend.id})}"><p th:text="${friend.username1}"></p></a>
+                            <a th:href="@{/userprofile/{id}/{sid} (id=${friend.id},sid=${session.id})}"><p th:text="${friend.username1}"></p></a>
                             <img src="/images/avatar.png" width="22" height="22">
                         </li>
                     </ul>

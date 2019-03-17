@@ -39,9 +39,10 @@ public class ProfileController {
         return "profile";
     }
 
-    @GetMapping("/userprofile/{id}")
-    public String userProfile(@PathVariable("id") int id, Model model) {
+    @GetMapping("/userprofile/{id}/{sid}")
+    public String userProfile(@PathVariable("id") int id, @PathVariable("sid") int sid, Model model) {
         model.addAttribute("users", userService.findUserById(id));
+        model.addAttribute("friends", friendService.isFriends(id, sid));
         return "userProfile";
     }
 

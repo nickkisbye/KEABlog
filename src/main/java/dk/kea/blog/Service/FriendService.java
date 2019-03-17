@@ -28,6 +28,8 @@ public class FriendService {
         db.addFriend(friendship);
     }
 
+    public void deleteFriendsFromDeletedUser(int id) { db.deleteFriendsFromDeletedUser(id); }
+
     public List<Friendship> getFriendsRequest(int id) {
         List<Friendship> friendsRequest = new ArrayList<>();
         ResultSet rs = db.getFriendRequests(id);
@@ -64,4 +66,15 @@ public class FriendService {
         }
         return friends;
     }
+
+    public boolean isFriends(int id, int sid) {
+        ResultSet rs = db.checkForFriends(id, sid);
+        try {
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

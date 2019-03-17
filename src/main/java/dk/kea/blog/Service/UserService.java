@@ -117,6 +117,7 @@ public class UserService {
                 User user = new User();
                 user.setRoleName(rs.getString("name"));
                 user.setRid(rs.getInt("id"));
+                user.setLevel(rs.getInt("level"));
                 roleList.add(user);
             }
         } catch (SQLException e) {

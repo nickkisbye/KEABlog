@@ -38,7 +38,7 @@
         <div class="form-group col-md-9 mt-4">
             <label>Role:</label>
             <select name="rid">
-                <option th:each="role: ${roles}" th:value="${role.rid}"><p th:text="${role.roleName}"></p></option>
+                <option th:each="role: ${roles}" th:value="${role.rid}" th:if="${role.level <= 90}"><p th:text="${role.roleName}"></p></option>
             </select>
             <button type="submit" class="btn btn-primary btn-block mt-3 col-md-12">Create user</button>
         </div>
