@@ -64,13 +64,22 @@ public class UserService {
         } else if(user.getAge() == null || user.getAge() > 120 || user.getAge() < 1) {
             return "Invalid age";
         } else {
-            db.createUser(user);
-            return "User have successfully been created!";
+            try {
+                if (db.userAlreadyexists(user.getEmail()).next()){
+                    return "User already exists.";
+                } else {
+                    db.createUser(user);
+                    return "User have successfully been created!";
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
+        return null;
     }
 
-    public String updateUser(User user) {
+    public String updateUser(User user, int id) {
+
         if(user.getFirstname().length() < 1 || user.getLastname().length() < 1) {
             return "First & Last name must be minimum 2 characters.";
         } else if(user.getCity().length() < 1 || onlyAlphanumeric(user.getCity())) {
@@ -82,9 +91,21 @@ public class UserService {
         } else if(user.getAge() == null || user.getAge() > 120 || user.getAge() < 1) {
             return "Invalid age";
         } else {
-            db.updateUser(user);
-            return "User have successfully been updated!";
+            try {
+                if (db.userAlreadyexistsUpdate(user.getEmail(), id).next()){
+                    db.updateUser(user);
+                    return "User have successfully been updated!";
+                } else if (db.userAlreadyexists(user.getEmail()).next()){
+                    return "Another user already have that email.";
+                } else {
+                    db.updateUser(user);
+                    return "User have successfully been updated with a new email!";
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return null;
     }
 
     public List<User> getUsers(String amount) {

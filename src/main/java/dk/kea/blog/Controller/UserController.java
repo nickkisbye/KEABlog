@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -20,7 +21,9 @@ public class UserController {
 
     @GetMapping("/userlist")
     public String getUserList(Model model) {
-        model.addAttribute("users", service.getUsers("all"));
+        List<User> userList = service.getUsers("all");
+        model.addAttribute("users", userList);
+        model.addAttribute("usercount", userList.size());
         return "users";
     }
 
@@ -65,11 +68,11 @@ public class UserController {
 
     @PostMapping("/user/update")
     public String updateUser(@ModelAttribute (name="User") User user, Model model, int id) {
-        model.addAttribute("message", service.updateUser(user));
+        model.addAttribute("message", service.updateUser(user, id));
         model.addAttribute("users", service.findUserById(id));
         model.addAttribute("roles", service.getRoles());
 
-        if (service.updateUser(user).equals("User have successfully been updated!")) {
+        if (service.updateUser(user, id).equals("User have successfully been updated!")) {
             return getUserForm(model);
         } else {
             return "editUser";

@@ -16,7 +16,7 @@ public class Database {
     public Database() {
         try {
             this.con = DriverManager.getConnection(
-                    "jdbc:mysql://den1.mysql5.gear.host/blogapp?useTimezone=true&serverTimezone=GMT%2B8",
+                    "jdbc:mysql://den1.mysql5.gear.host/blogapp?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UCT&useSSL=false",
                     "blogapp",
                     "Qm1bh3_u_YYJ");
         } catch (SQLException e) {
@@ -321,4 +321,28 @@ public class Database {
         return null;
     }
 
+    public ResultSet userAlreadyexists(String email) {
+        String query = "SELECT email, id FROM users WHERE email=?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet userAlreadyexistsUpdate(String email, int id) {
+        String query = "SELECT email FROM users WHERE email=? AND id=?";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            preparedStatement.setInt(2, id);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

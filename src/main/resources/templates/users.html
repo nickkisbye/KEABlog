@@ -7,14 +7,14 @@
 <header>
     <div th:replace="fragments/header :: header"></div>
 </header>
-
 <div>
+
     <table class="table table-hover mt-4 col-md-9" style="margin-left: 12%;">
         <thead>
         <tr class="table-info">
             <th scope="col">First name</th>
             <th scope="col">Last name</th>
-            <th scope="col"></th>
+            <th scope="col" class="float-right mr-4" th:text="'Total users: ' + ${usercount}"></th>
         </tr>
         </thead>
         <tr th:each="user: ${users}">
