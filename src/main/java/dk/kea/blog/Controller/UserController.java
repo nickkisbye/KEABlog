@@ -39,6 +39,17 @@ public class UserController {
         return "createUser";
     }
 
+    @GetMapping("/user/register")
+    public String getRegisterForm() {
+        return "register";
+    }
+
+    @PostMapping("/user/register")
+    public String registerUser(@ModelAttribute User user, Model model) {
+        model.addAttribute("message", service.createUser(user));
+        return "register";
+    }
+
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") int id, HttpSession session) {
         service.deleteUser(id, session);
