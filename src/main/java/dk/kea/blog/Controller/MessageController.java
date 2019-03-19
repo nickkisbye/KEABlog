@@ -1,5 +1,6 @@
 package dk.kea.blog.Controller;
 
+import dk.kea.blog.Models.Message;
 import dk.kea.blog.Service.BlogService;
 import dk.kea.blog.Service.FriendService;
 import dk.kea.blog.Service.MessageService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,4 +41,10 @@ public class MessageController {
         return "messages";
     }
 
+    @PostMapping("/message/{id}")
+    public String createMsg(@PathVariable("id") int id, Message message, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("id");
+
+        return "redirect:/messages";
+    }
 }

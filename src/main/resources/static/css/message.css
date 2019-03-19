@@ -1,0 +1,85 @@
+.mycontainer {
+    margin: 0 auto;
+    min-width: 400px;
+    max-width: 80%;
+    padding-top: 20px;
+}
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.friendlist {
+    width: 38%;
+    height: 100%;
+    float: left;
+}
+
+.friendlist .oneperson {
+    border: solid 1px gainsboro;
+    min-width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 15px;
+}
+.friendlist .oneperson {
+
+}
+.friendlist .oneperson img{
+    float: left;
+    height: 20px;
+    width: 20px;
+}
+.friendlist .oneperson p{
+    float: right;
+    line-height: 20px;
+    margin-right: 10px;
+}
+.friendlist .oneperson:hover{
+    background-color: gainsboro;
+}
+
+.chatbox {
+    width: 60%;
+    height: 800px;
+    float: right;
+}
+.chatbox .messagecontainer {
+    width: 100%;
+    height: 35px;
+    margin: 0px 0px 3px;
+}
+.chatbox .from {
+    background-color: #1a82ae;
+    float: right;
+    padding: 6px 12px 7px;
+    border-radius: 1.3em;
+    color: white;
+}
+.chatbox .to {
+    background-color: gainsboro;
+    float: left;
+    padding: 6px 12px 7px;
+    border-radius: 1.3em;
+    color: black;
+}
+.chatinput {
+    width: 100%;
+    margin-top: 10px;
+}
+.chatinput input{
+    width: 84%;
+    float: left;
+    border-radius: 1.3em;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    border: 1px solid gainsboro;
+}
+.chatinput button{
+    width: 14%;
+    float: right;
+    border-radius: 1.3em;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    border: 1px solid gainsboro;
+}

@@ -32,4 +32,8 @@ public class MessageService {
         }
         return messages;
     }
+
+    public void insertMessage(Message message) {
+        //db.sendMsg();
+    }
 }

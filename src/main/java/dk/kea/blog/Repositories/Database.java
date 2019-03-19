@@ -345,4 +345,17 @@ public class Database {
         }
         return null;
     }
+    public void sendMsg(String msg, boolean read, int sender, int receiver) {
+        String query = "INSERT INTO message (message, read, timestamp, fk_senderUser, fk_receiverUser) VALUES (?, ?, ?, ?, ?)";
+        try {
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, msg);
+            preparedStatement.setBoolean(2, read);
+            preparedStatement.setInt(3, receiver);
+            preparedStatement.setInt(4, sender);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
