@@ -31,7 +31,7 @@ public class MenuController {
 
     @GetMapping("/posts")
     public String post(Model model) {
-        model.addAttribute("blogs",blogService.getBlogPosts("all"));
+        model.addAttribute("blogs", blogService.getBlogPosts("all"));
         return "posts";
     }
 

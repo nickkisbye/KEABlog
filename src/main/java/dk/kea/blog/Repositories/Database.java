@@ -2,6 +2,7 @@ package dk.kea.blog.Repositories;
 
 import dk.kea.blog.Models.Blog;
 import dk.kea.blog.Models.Friendship;
+import dk.kea.blog.Models.Message;
 import dk.kea.blog.Models.User;
 import org.springframework.stereotype.Repository;
 
@@ -345,17 +346,30 @@ public class Database {
         }
         return null;
     }
-    public void sendMsg(String msg, boolean read, int sender, int receiver) {
-        String query = "INSERT INTO message (message, read, timestamp, fk_senderUser, fk_receiverUser) VALUES (?, ?, ?, ?, ?)";
+    public void sendMsg(Message message, int sender, int receiver) {
+        String query = "INSERT INTO message (message, readCheck, fk_senderUser, fk_receiverUser) VALUES (?, ?, ?, ?)";
         try {
             preparedStatement = con.prepareStatement(query);
-            preparedStatement.setString(1, msg);
-            preparedStatement.setBoolean(2, read);
-            preparedStatement.setInt(3, receiver);
-            preparedStatement.setInt(4, sender);
+            preparedStatement.setString(1, message.getMessage());
+            preparedStatement.setBoolean(2, false);
+            preparedStatement.setInt(3, sender);
+            preparedStatement.setInt(4, receiver);
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public ResultSet findFriendById(int id) {
+        String query = "SELECT * FROM friends" +
+                " INNER JOIN users as u1 on fk_userIdOne = u1.id" +
+                " INNER JOIN users as u2 on fk_userIdTwo = u2.id" +
+                " WHERE fk_userIdTwo = " + id;
+        try {
+            preparedStatement = con.prepareStatement(query);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

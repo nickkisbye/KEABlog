@@ -13,7 +13,7 @@
     <div class="mycontainer">
         <div class="friendlist">
             <div th:each="friend: ${friendlist}">
-                <a th:href="@{/message/{id} (id=${friend.id})}">
+                <a th:href="@{/messages/{id} (id=${friend.id})}">
                     <div class="oneperson">
                         <img src="/images/avatar.png" width="22" height="22">
                         <p th:text="${friend.username1}"></p>
@@ -41,10 +41,13 @@
                     </div>
                 </div>
             </div>
-            <form class="chatinput" action="">
-                <input type="text" name="sendMessage">
-                <button type="submit">send</button>
-            </form>
+            <div th:each="friend: ${findFriend}">
+                <form class="chatinput" th:action="@{/messages}" th:object="${Message}" method="post" >
+                    <input type="text" name="message">
+                    <input type="hidden" name="receiver" th:value="${friend.user1}">
+                    <button type="submit">send</button>
+                </form>
+            </div>
         </div>
     </div>
 

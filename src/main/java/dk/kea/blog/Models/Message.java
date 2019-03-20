@@ -4,26 +4,19 @@ public class Message {
 
     private int id;
     private String message;
-    private boolean read;
+    private boolean readCheck;
     private String timestamp;
     private int senderUser;
     private int receiverUser;
 
-    public Message(int id, String message, boolean read, String timestamp, int senderUser, int receiverUser) {
+    public Message(int id, String message, boolean readCheck, String timestamp, int senderUser, int receiverUser) {
         this.id = id;
         this.message = message;
-        this.read = read;
+        this.readCheck = readCheck;
         this.timestamp = timestamp;
         this.senderUser = senderUser;
         this.receiverUser = receiverUser;
     }
-
-    public Message(String message, int senderUser, int receiverUser) {
-        this.message = message;
-        this.senderUser = senderUser;
-        this.receiverUser = receiverUser;
-    }
-
     public Message() {
 
     }
@@ -44,12 +37,12 @@ public class Message {
         this.message = message;
     }
 
-    public boolean isRead() {
-        return read;
+    public boolean isReadCheck() {
+        return readCheck;
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setReadCheck(boolean readCheck) {
+        this.readCheck = readCheck;
     }
 
     public String getTimestamp() {
