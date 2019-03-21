@@ -10,16 +10,16 @@
 
     <div class="jumbotron text-center">
         <h1 class="display-3">Welcome!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <p class="lead">On this page you can register, read blog posts and chat with your friends.</p>
         <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p>Join the KEA-blog today!</p>
         <p class="lead">
             <a th:if="${session.level == null}" class="btn btn-primary btn-lg" href="/user/register" role="button">Register User</a>
         </p>
     </div>
 
     <h4 class="ml-5">Welcome to the newest users</h4>
-    <div class="card text-white bg-info ml-5 mt-2 float-left" style="width: 26rem;" th:each="user : ${latestusers}">
+    <div class="card text-white bg-info ml-5 mt-2 mb-5 float-left" style="width: 26rem;" th:each="user : ${latestusers}">
         <div class="card-header"><p class="float-left" th:text="'Joined: ' + ${user.date}"> <p class="float-right" th:if="${user.level >= 90}"><i class="em em-star"></i></p> </div>
         <div class="card-body">
             <h4 class="card-title"><p th:text="${user.firstname + ' ' + user.lastname}"></p></p></h4>

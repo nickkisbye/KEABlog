@@ -188,7 +188,7 @@ public class Database {
     }
 
     public  ResultSet getLatestUser() {
-        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id ORDER BY users.id DESC LIMIT 4";
+        String query = "SELECT * FROM users INNER JOIN roles ON users.fk_roles = roles.id ORDER BY users.id DESC LIMIT 3";
         try {
             preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();
