@@ -44,7 +44,7 @@ public class MessageController {
     }
 
     @PostMapping("/messages")
-    public String createMsg(@ModelAttribute(name="Message") Message message, Model model,  HttpSession session) {
+        public String createMsg(@ModelAttribute(name="Message") Message message, Model model,  HttpSession session) {
         Integer sessionId = (Integer) session.getAttribute("id");
         messageService.insertMessage(message, sessionId, message.getReceiverUser());
         return "redirect:/messages/" + message.getReceiverUser();
