@@ -63,7 +63,7 @@ public class Database {
     }
 
     public ResultSet getLatestBlogPosts() {
-        String query = "SELECT * FROM blog INNER JOIN users ON blog.fk_users = users.id ORDER BY blog.id DESC LIMIT 4";
+        String query = "SELECT * FROM blog INNER JOIN users ON blog.fk_users = users.id ORDER BY blog.id DESC LIMIT 3";
         try {
             preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();
