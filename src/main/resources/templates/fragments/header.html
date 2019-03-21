@@ -34,20 +34,17 @@
             </div>
             <div th:if="${session.level != null}">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/messages}">Messages</a>
-                    </li>
-                    <li class="nav-item" >
-                    <img src="/images/avatar.png" class="float-left mt-2 mr-2" width="22" height="22"> <Strong class="nav-link float-right" th:text="${session.firstName}"></Strong>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/profile/{id}(id=${session.id})}">My Profile</a>
-                    </li>
                     <div th:if="${session.level >= 90}">
                     <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin Panel</a>
                     </li>
                     </div>
+                    <li class="nav-item" >
+                    <img src="/images/avatar.png" class="float-left mt-2" width="22" height="22"> <a class="nav-link float-right" th:href="@{/profile/{id}(id=${session.id})}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/messages}">Messages</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log out</a>
                     </li>
