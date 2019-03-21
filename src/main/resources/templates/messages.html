@@ -45,7 +45,7 @@
                 <form class="chatinput" th:action="@{/messages}" th:object="${Message}" method="post" >
                     <input type="text" name="message">
                     <input type="hidden" name="receiverUser" th:value="${friend.user1}">
-                    <button type="submit">send</button>
+                    <button type="submit">Send</button>
                 </form>
             </div>
         </div>

@@ -48,5 +48,6 @@ public class MessageController {
         Integer sessionId = (Integer) session.getAttribute("id");
         messageService.insertMessage(message, sessionId, message.getReceiverUser());
         return "redirect:/messages/" + message.getReceiverUser();
+        //test
     }
 }
