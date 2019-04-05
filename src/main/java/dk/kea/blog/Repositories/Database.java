@@ -17,7 +17,7 @@ public class Database {
     public Database() {
         try {
             this.con = DriverManager.getConnection(
-                    "jdbc:mysql://den1.mysql5.gear.host/blogapp",
+                    "jdbc:mysql://den1.mysql5.gear.host:3306/blogapp",
                     "blogapp",
                     "Qm1bh3_u_YYJ");
         } catch (SQLException e) {
@@ -306,8 +306,8 @@ public class Database {
 
     public ResultSet receiveMessages(int sender, int receiver) {
         String query = "SELECT * FROM message " +
-                "INNER JOIN users as u1 ON fk_senderUser = u1.id " +
-                "INNER JOIN users as u2 ON fk_receiverUser = u2.id " +
+                "LEFT JOIN users as u1 ON fk_senderUser = u1.id " +
+                "LEFT JOIN users as u2 ON fk_receiverUser = u2.id " +
                 "WHERE (fk_senderUser = ? AND fk_receiverUser = ?) OR (fk_senderUser = ? AND fk_receiverUser = ?) ORDER BY message.id";
         try {
             preparedStatement = con.prepareStatement(query);

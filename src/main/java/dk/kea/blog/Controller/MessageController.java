@@ -50,4 +50,6 @@ public class MessageController {
         return "redirect:/messages/" + message.getReceiverUser();
         //test
     }
+
+    //aafaffa
 }
