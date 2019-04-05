@@ -20,7 +20,6 @@
             <nav id="profiletabs">
                 <ul class="clearfix">
                     <li><a href="#bio" class="sel">Profile</a></li>
-                    <li><a href="#activity">Activity</a></li>
                     <li><a href="#friends">Friends</a></li>
                     <a th:if="${session.id != user.id && session.id != null && !friends}" th:href="@{/addfriend/{id} (id=${user.id})}">Add friend</a>
                 </ul>
