@@ -2,6 +2,7 @@ package dk.kea.blog.Service;
 
 import dk.kea.blog.Models.Friendship;
 import dk.kea.blog.Repositories.Database;
+import dk.kea.blog.Repositories.FriendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +15,25 @@ import java.util.List;
 public class FriendService {
 
     @Autowired
-    Database db;
+    FriendRepository friendRepository;
 
     public void acceptFriendRequest(int id) {
-        db.acceptFriendRequest(id);
+        friendRepository.acceptFriendRequest(id);
     }
 
     public void deleteFriendRequest(int id) {
-        db.deleteFriendRequest(id);
+        friendRepository.deleteFriendRequest(id);
     }
 
     public void addFriend(Friendship friendship) {
         if (friendship.getUser1() > 0) {
-            db.addFriend(friendship);
+            friendRepository.addFriend(friendship);
         }
     }
 
     public List<Friendship> getFriendsRequest(int id) {
         List<Friendship> friendsRequest = new ArrayList<>();
-        ResultSet rs = db.getFriendRequests(id);
+        ResultSet rs = friendRepository.getFriendRequests(id);
         try {
             while (rs.next()) {
                 Friendship friendship = new Friendship();
@@ -48,7 +49,7 @@ public class FriendService {
 
     public List<Friendship> getFriends(int id) {
         List<Friendship> friends = new ArrayList<>();
-        ResultSet rs = db.getFriends(id);
+        ResultSet rs = friendRepository.getFriends(id);
         try {
             while (rs.next()) {
                 Friendship friendship = new Friendship();
@@ -71,7 +72,7 @@ public class FriendService {
         if (sid == null) {
             sid = 0;
         }
-        ResultSet rs = db.checkForFriends(id, sid);
+        ResultSet rs = friendRepository.checkForFriends(id, sid);
         try {
             return rs.next();
         } catch (SQLException e) {

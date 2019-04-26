@@ -1,11 +1,10 @@
 package dk.kea.blog.Service;
 
 import dk.kea.blog.Models.Blog;
-import dk.kea.blog.Models.User;
+import dk.kea.blog.Repositories.BlogRepository;
 import dk.kea.blog.Repositories.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
@@ -17,13 +16,15 @@ import java.util.List;
 public class BlogService {
 
     @Autowired
+    BlogRepository blogRepository;
+    @Autowired
     Database db;
     public List<Blog> getBlogPosts(String amount) {
         ResultSet rs = null;
         if (amount.equals("all")) {
-            rs = db.getBlogPosts();
+            rs = blogRepository.getBlogPosts();
         } else if (amount.equals("latest")) {
-            rs = db.getLatestBlogPosts();
+            rs = blogRepository.getLatestBlogPosts();
         }
 
         List<Blog> blogList = new ArrayList<>();
@@ -50,7 +51,7 @@ public class BlogService {
         } else if (blog.getText().length() < 2) {
             return "Length of text is too short. Minimum 3 character.";
         } else {
-            db.createPost(blog);
+            blogRepository.createPost(blog);
             return "The blog post was successfully created!";
         }
 
@@ -68,7 +69,7 @@ public class BlogService {
 
     public List<Blog> findBlogById(int id) {
         List<Blog> blogList = new ArrayList<>();
-        ResultSet rs = db.findBlogById(id);
+        ResultSet rs = blogRepository.findBlogById(id);
         try {
             while (rs.next()) {
                 Blog blog = new Blog();
@@ -90,7 +91,7 @@ public class BlogService {
         } else if (blog.getText().length() < 2) {
             return "Length of text is too short. Minimum 3 character.";
         } else {
-            db.updateBlog(blog);
+            blogRepository.updateBlog(blog);
             return "The blog post was successfully updated!";
         }
     }

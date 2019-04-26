@@ -2,6 +2,7 @@ package dk.kea.blog.Service;
 
 import dk.kea.blog.Models.User;
 import dk.kea.blog.Repositories.Database;
+import dk.kea.blog.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,9 @@ import java.util.regex.Pattern;
 public class UserService {
 
     @Autowired
-    Database db;
+    UserRepository userRepository;
     public boolean verifyUser(User user) {
-        ResultSet rs = db.selectUser(user);
+        ResultSet rs = userRepository.selectUser(user);
         try {
             if (rs.next()) {
                     user.setCity(rs.getString("city"));
@@ -46,7 +47,7 @@ public class UserService {
         if(user.getPassword().length() < 2 || user.getPassword().length() > 16) {
             return "Password must contain between 3 - 16 characters.";
         } else {
-            db.newPasswordDB(user);
+            userRepository.newPasswordDB(user);
             return "You have successfully change your password!";
         }
     }
@@ -65,10 +66,10 @@ public class UserService {
             return "Invalid age";
         } else {
             try {
-                if (db.userAlreadyexists(user.getEmail()).next()){
+                if (userRepository.userAlreadyexists(user.getEmail()).next()){
                     return "User already exists.";
                 } else {
-                    db.createUser(user);
+                    userRepository.createUser(user);
                     return "User have successfully been created!";
                 }
             } catch (SQLException e) {
@@ -92,13 +93,13 @@ public class UserService {
             return "Invalid age";
         } else {
             try {
-                if (db.userAlreadyexistsUpdate(user.getEmail(), id).next()){
-                    db.updateUser(user);
+                if (userRepository.userAlreadyexistsUpdate(user.getEmail(), id).next()){
+                    userRepository.updateUser(user);
                     return "User have successfully been updated!";
-                } else if (db.userAlreadyexists(user.getEmail()).next()){
+                } else if (userRepository.userAlreadyexists(user.getEmail()).next()){
                     return "Another user already have that email.";
                 } else {
-                    db.updateUser(user);
+                    userRepository.updateUser(user);
                     return "User have successfully been updated with a new email!";
                 }
             } catch (SQLException e) {
@@ -112,9 +113,9 @@ public class UserService {
         List<User> userList = new ArrayList<>();
         ResultSet rs = null;
         if (amount.equals("all")) {
-            rs = db.getUsers();
+            rs = userRepository.getUsers();
         } else if (amount.equals("latest")) {
-            rs = db.getLatestUser();
+            rs = userRepository.getLatestUser();
         }
         try {
             while (rs.next()) {
@@ -139,7 +140,7 @@ public class UserService {
 
     public List<User> getRoles() {
         List<User> roleList = new ArrayList<>();
-        ResultSet rs = db.getRoles();
+        ResultSet rs = userRepository.getRoles();
         try {
             while (rs.next()) {
                 User user = new User();
@@ -154,6 +155,9 @@ public class UserService {
         return roleList;
     }
 
+    @Autowired
+    Database db;
+
     public void deleteUser(int id, HttpSession session) {
         Integer requiredLevel = (Integer) session.getAttribute("level");
         Integer inSession = (Integer) session.getAttribute("id");
@@ -166,7 +170,7 @@ public class UserService {
 
     public List<User> findUserById(int id) {
         List<User> userList = new ArrayList<>();
-        ResultSet rs = db.findUserById(id);
+        ResultSet rs = userRepository.findUserById(id);
         try {
             while (rs.next()) {
                 User user = new User();
