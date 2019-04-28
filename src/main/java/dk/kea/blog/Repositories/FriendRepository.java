@@ -102,26 +102,15 @@ public class FriendRepository {
     }
 
     public ResultSet checkForFriends(int id, int sid) {
-        String query = "SELECT * FROM friends WHERE (fk_userIdOne=? AND fk_userIdTwo=?) OR (fk_userIdOne=? AND fk_userIdTwo=?)";
+        String query = "SELECT * FROM friends " +
+                " WHERE (fk_userIdOne=? AND fk_userIdTwo=?) " +
+                " OR (fk_userIdOne=? AND fk_userIdTwo=?)";
         try {
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.setInt(2, sid);
             preparedStatement.setInt(3, sid);
             preparedStatement.setInt(4, id);
-            return preparedStatement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public ResultSet findFriendById(int id) {
-        String query = "SELECT * FROM friends" +
-                " INNER JOIN users as u1 on fk_userIdOne = u1.id" +
-                " INNER JOIN users as u2 on fk_userIdTwo = u2.id" +
-                " WHERE fk_userIdTwo = " + id;
-        try {
-            preparedStatement = con.prepareStatement(query);
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

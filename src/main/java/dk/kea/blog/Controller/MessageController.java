@@ -39,17 +39,14 @@ public class MessageController {
         Integer userId = (Integer) session.getAttribute("id");
         model.addAttribute("friendlist", friendService.getFriends(userId));
         model.addAttribute("messages", messageService.getMessages(id, userId));
-        model.addAttribute("findFriend", messageService.getFriend(id));
+        model.addAttribute("findFriend", messageService.getFriend(id, userId));
         return "messages";
     }
 
     @PostMapping("/messages")
-        public String createMsg(@ModelAttribute(name="Message") Message message, Model model,  HttpSession session) {
+    public String createMsg(@ModelAttribute(name="Message") Message message, Model model,  HttpSession session) {
         Integer sessionId = (Integer) session.getAttribute("id");
         messageService.insertMessage(message, sessionId, message.getReceiverUser());
         return "redirect:/messages/" + message.getReceiverUser();
-        //test
     }
-
-    //aafaffa
 }

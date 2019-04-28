@@ -41,13 +41,17 @@ public class MessageService {
         messageRepository.sendMsg(message, sender, receiver);
     }
 
-    public List<Friendship> getFriend(int id) {
+    public List<Friendship> getFriend(int sender, int receiver) {
         List<Friendship> friend = new ArrayList<>();
-        ResultSet rs = friendRepository.findFriendById(id);
+        ResultSet rs = friendRepository.checkForFriends(sender, receiver);
         try {
             while(rs.next()) {
                 Friendship friendship = new Friendship();
-                friendship.setUser1(rs.getInt("fk_userIdTwo"));
+                if (rs.getInt("fk_userIdTwo") == sender) {
+                    friendship.setUser1(rs.getInt("fk_userIdTwo"));
+                } else {
+                    friendship.setUser1(rs.getInt("fk_userIdOne"));
+                }
                 friend.add(friendship);
             }
         } catch (SQLException e) {

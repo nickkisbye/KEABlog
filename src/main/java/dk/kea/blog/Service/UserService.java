@@ -80,7 +80,6 @@ public class UserService {
     }
 
     public String updateUser(User user, int id) {
-
         if(user.getFirstname().length() < 1 || user.getLastname().length() < 1) {
             return "First & Last name must be minimum 2 characters.";
         } else if(user.getCity().length() < 1 || onlyAlphanumeric(user.getCity())) {
